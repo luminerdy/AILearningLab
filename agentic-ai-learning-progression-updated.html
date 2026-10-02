@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Autocomplete to Agentic Engineering</title>
+<style>
+:root{
+  --navy:#071827; --navy2:#0d2638; --teal:#25c7bd; --teal2:#79e2d8;
+  --white:#f7f3ea; --muted:#a9bac5; --line:#21465b; --card:#102a3c;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,var(--navy),#091f31 65%,#0b2b39);color:var(--white);
+font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.5}
+main{max-width:1180px;margin:auto;padding:56px 32px 80px}
+.eyebrow{color:var(--teal2);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.8rem}
+h1{font-size:clamp(2.4rem,6vw,5.4rem);line-height:.98;margin:.25em 0 .25em;max-width:950px}
+.lead{font-size:1.25rem;color:#d7e2e7;max-width:850px}
+section{margin-top:72px}
+h2{font-size:2rem;margin-bottom:10px}
+.sub{color:var(--muted);max-width:850px;margin-top:0}
+.ladder{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin-top:30px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 10px;min-height:115px}
+.step b{display:block;color:var(--teal2);font-size:.85rem;letter-spacing:.05em}
+.step span{display:block;font-size:.9rem;margin-top:8px;color:#dce6ea}
+.llm{border-color:var(--teal);box-shadow:0 0 0 1px rgba(37,199,189,.18)}
+.arrow{color:var(--teal);font-size:1.1rem}
+.loop{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:32px 0}
+.pill{border:1px solid var(--teal);padding:12px 22px;border-radius:999px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+.card{background:rgba(16,42,60,.82);border:1px solid var(--line);border-radius:16px;padding:24px}
+.card h3{margin:0 0 8px;color:var(--teal2)}
+.card p{margin:0;color:#cfdae0}
+.bigidea{margin-top:32px;border-left:5px solid var(--teal);background:#0e2a3c;padding:24px 28px;font-size:1.35rem;border-radius:0 14px 14px 0}
+.timeline{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:28px}
+.timeline .card{min-height:230px}
+.timeline h3{font-size:1.35rem}
+.flow{font-size:1.05rem;font-weight:700;color:#e8f1f3;margin:20px 0}
+.small{color:var(--muted);font-size:.92rem}
+footer{margin-top:70px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted)}
+@media(max-width:900px){.ladder{grid-template-columns:repeat(3,1fr)}.grid,.timeline{grid-template-columns:1fr}}
+@media(max-width:560px){main{padding:38px 20px}.ladder{grid-template-columns:1fr 1fr}}
+
+/* Inclusive entry points and progressively stronger checking. */
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+.principle{display:inline-block;margin:16px 0 0;padding:10px 0;border-bottom:2px solid var(--teal);color:var(--teal2);font-size:1.35rem;font-weight:750}
+.section-nav{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:30px}
+.section-nav a{color:var(--teal2);font-size:.9rem;text-underline-offset:5px}
+a:focus-visible{outline:2px solid var(--teal);outline-offset:5px}
+.ladder{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.step{padding:20px;min-height:135px;position:relative}
+.step b{font-size:1rem;overflow-wrap:anywhere}
+.step .stage-note{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px}
+.step.historical{border-style:dashed;background:rgba(16,42,60,.45)}
+.step.entry{border:2px solid var(--teal);background:#123b48;box-shadow:0 0 24px rgba(37,199,189,.09)}
+.step.entry .stage-note{color:var(--teal2);font-weight:750}
+.entry-route{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;margin-top:25px}
+.entry-route .small{margin:0 0 20px;padding-bottom:20px;border-bottom:1px dashed var(--line)}
+.entry-route .entry-label{color:var(--teal2);font-size:.9rem;font-weight:750;margin:0 0 10px}
+.entry-route .flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0;font-size:.92rem}
+.ask-marker{background:var(--teal);color:var(--navy);padding:7px 14px;border-radius:6px;font-size:1rem}
+.entry-route .route-note{margin:18px 0 0;color:var(--muted);font-size:.9rem}
+.question{border:1px solid var(--teal);border-radius:16px;background:linear-gradient(115deg,#123b48,#102a3c);padding:32px;margin:28px 0}
+.question blockquote{font-size:clamp(1.8rem,4vw,3rem);line-height:1.15;font-weight:750;margin:12px 0 20px;max-width:900px;letter-spacing:-.025em}
+.question p:last-child{margin:0;color:#d7e2e7;max-width:900px;font-size:1.1rem}
+.checks{list-style:none;counter-reset:checks;padding:0;margin:30px 0}
+.check{counter-increment:checks;display:grid;grid-template-columns:48px 235px 1fr;gap:20px;padding:26px;border:1px solid var(--line);background:var(--card);border-radius:14px;margin-bottom:26px;position:relative}
+.check::before{content:'0' counter(checks);width:42px;height:42px;border:1px solid var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--teal2);font-weight:750}
+.check:not(:last-child)::after{content:'↓';position:absolute;left:39px;bottom:-28px;color:var(--teal);font-size:1.4rem;line-height:28px}
+.check h3{margin:2px 0 10px;font-size:1.2rem;color:var(--teal2)}
+.check .prompt{margin:0;color:var(--white);font-weight:650}
+.check p{margin:0 0 12px;color:#cfdae0}
+.check .example{margin:0;font-size:.92rem;color:var(--muted)}
+.stakes{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+.closing{margin-top:55px;padding:32px;border:1px solid var(--teal);border-radius:16px;background:#102f40}
+.closing h2{margin:0 0 16px;color:var(--teal2)}
+.closing p{font-size:1.15rem;margin:0;max-width:900px}
+@media(max-width:900px){.check{grid-template-columns:42px 1fr}.check .detail{grid-column:2}.check:not(:last-child)::after{left:37px}}
+@media(max-width:560px){.ladder,.stakes{grid-template-columns:1fr}.step{min-height:0}.question,.entry-route,.closing{padding:23px}.check{padding:20px 16px;gap:13px}.check:not(:last-child)::after{left:27px}.loop{gap:9px}.pill{padding:9px 14px;font-size:.9rem}.bigidea{padding:20px;font-size:1.15rem}h2{font-size:1.75rem}.entry-route .flow{gap:8px;font-size:.82rem}.entry-route .flow .arrow{font-size:1rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{@page{margin:15mm}body{background:white;color:#102a3c;font-size:10pt}main{max-width:none;padding:0}.section-nav{display:none}h1{font-size:36pt}h2{font-size:23pt;break-after:avoid}section{margin-top:30px}.lead,.sub,.small,footer,.card p,.step span,.check p,.check .example,.question p:last-child,.entry-route .route-note,.check .prompt{color:#284554}.eyebrow,.principle,.card h3,.check h3,.step b,.step.entry .stage-note,.closing h2,.entry-route .entry-label{color:#09685f}.card,.step,.step.entry,.entry-route,.question,.check,.closing,.bigidea{background:#f0f7f7;border-color:#7faaa9;box-shadow:none}.card,.step,.check,.question,.closing{break-inside:avoid}.grid,.timeline{grid-template-columns:repeat(3,1fr)}.timeline .card{min-height:0}.flow{color:#102a3c}.question blockquote{font-size:24pt}.checks .check{grid-template-columns:40px 170px 1fr}.check .detail{grid-column:auto}.check::before{color:#09685f}.bigidea{font-size:13pt}.ladder{margin-top:18px}.step{min-height:0}.closing p{font-size:12pt}footer{margin-top:30px}}
+
+/* Self-location learning map */
+.self-map{margin-top:28px;padding:28px;background:rgba(16,42,60,.72);border:1px solid var(--line);border-radius:16px}
+.self-map h3{margin:0 0 8px;color:var(--teal2);font-size:1.35rem}
+.self-map .hint{color:var(--muted);margin:0 0 22px}
+.map-line{display:grid;grid-template-columns:repeat(9,minmax(90px,1fr));gap:0;overflow-x:auto;padding:18px 0 10px}
+.map-stage{position:relative;text-align:center;padding:26px 7px 0;min-width:90px}
+.map-stage::before{content:'';position:absolute;top:8px;left:0;right:0;height:2px;background:var(--line)}
+.map-stage:first-child::before{left:50%}.map-stage:last-child::before{right:50%}
+.map-stage::after{content:'';position:absolute;top:2px;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:var(--navy2);border:2px solid var(--teal)}
+.map-stage strong{display:block;color:var(--teal2);font-size:.75rem;letter-spacing:.04em}
+.map-stage span{display:block;color:#cfdae0;font-size:.76rem;margin-top:5px}
+.map-stage.historical-map strong,.map-stage.historical-map span{color:var(--muted)}
+.map-stage.historical-map::after{border-color:#6c8795}
+.map-key{display:flex;flex-wrap:wrap;gap:12px 22px;margin-top:20px;color:#d7e2e7;font-size:.9rem}
+.key-item{display:flex;align-items:center;gap:8px}
+.key-dot,.key-ring,.key-star{width:17px;height:17px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.key-dot{border-radius:50%;background:var(--teal)}.key-ring{border-radius:50%;border:2px solid var(--teal)}
+.key-star{color:var(--teal2);font-size:1.15rem}
+.assess-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.assess{border-top:1px solid var(--line);padding-top:14px;color:#cfdae0;font-size:.92rem}
+.assess strong{display:block;color:var(--white);margin-bottom:4px}
+@media(max-width:900px){.assess-grid{grid-template-columns:1fr}.map-line{grid-template-columns:repeat(9,110px)}}
+
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Human Learning Progression</div>
+  <h1>From Autocomplete to Agentic Engineering</h1>
+  <p class="lead">AI did not suddenly take us from writing code to autonomous agents. For decades, our tools have taken on progressively more work. What changes is what the human provides—and how much work happens before we check the result.</p>
+
+  <p class="principle">Start where you are. Move one step.</p>
+  <nav class="section-nav" aria-label="Document sections"><a href="#entry">Where to begin</a><a href="#progression">The progression</a><a href="#loop">The universal loop</a><a href="#check">How checking grows</a></nav>
+
+  <section aria-labelledby="entry">
+    <div class="eyebrow">Multiple entry points</div>
+    <h2 id="entry">You Don’t Have to Start at the Beginning</h2>
+    <p class="lead">Traditional developers may have experienced ASSIST → SUGGEST → ASK as their tools evolved. That history is one path into working with AI. It is not a required course of study.</p>
+    <p class="sub">A new AI user can begin directly at <strong>ASK</strong>, using everyday language. You do not need coding experience or familiarity with an integrated development environment (IDE) to begin learning.</p>
+    <div class="entry-route">
+      <p class="small"><strong>Historical / traditional developer journey:</strong> ASSIST → SUGGEST → ASK<br>ASSIST and SUGGEST describe earlier tool experiences, not prerequisites.</p>
+      <p class="entry-label">↓ New AI users can enter at ASK</p>
+      <div class="flow" aria-label="ASK, then COLLABORATE, ORIENT, TEACH, ENABLE, DELEGATE, ORCHESTRATE"><strong class="ask-marker">ASK</strong><span class="arrow" aria-hidden="true">→</span><span>COLLABORATE</span><span class="arrow" aria-hidden="true">→</span><span>ORIENT</span><span class="arrow" aria-hidden="true">→</span><span>TEACH</span><span class="arrow" aria-hidden="true">→</span><span>ENABLE</span><span class="arrow" aria-hidden="true">→</span><span>DELEGATE</span><span class="arrow" aria-hidden="true">→</span><span>ORCHESTRATE</span></div>
+      <p class="route-note">Start with the practice that fits your task. Move among these practices as you learn; the progression is not a prerequisite chain.</p>
+    </div>
+  </section>
+  <section>
+    <h2 id="progression">The progression</h2>
+    <p class="sub">This is a learning progression for the human, not simply a list of AI technologies. It describes practices you can grow into and return to—not prerequisites you must complete in order.</p>
+    <div class="ladder">
+      <div class="step historical"><span class="stage-note">Traditional developer path</span><b>ASSIST</b><span>Autocomplete, syntax highlighting, IntelliSense</span></div>
+      <div class="step historical"><span class="stage-note">Traditional developer path</span><b>SUGGEST</b><span>Predictive and whole-line code completion</span></div>
+      <div class="step llm entry"><span class="stage-note">↓ New AI users can enter here</span><b>ASK</b><span>Natural-language prompting and LLM chat</span></div>
+      <div class="step llm"><b>COLLABORATE</b><span>Iterative conversation and vibe coding</span></div>
+      <div class="step llm"><b>ORIENT</b><span>Context, repository knowledge, AGENTS.md</span></div>
+      <div class="step llm"><b>TEACH</b><span>Reusable skills and procedures</span></div>
+      <div class="step llm"><b>ENABLE</b><span>Tools, shell, APIs, MCP, tests</span></div>
+      <div class="step llm"><b>DELEGATE</b><span>Agents own bounded goals</span></div>
+      <div class="step llm"><b>ORCHESTRATE</b><span>Human + AI workflows</span></div>
+    </div>
+    <div class="bigidea">The major LLM shift: we moved from the computer predicting <strong>what I was going to type</strong> to working from <strong>what I am trying to accomplish.</strong></div>
+
+    <div class="self-map" aria-labelledby="find-yourself">
+      <h3 id="find-yourself">Find yourself on the line</h3>
+      <p class="hint">This is a learning map, not a maturity score. You do not need to reach ORCHESTRATE. Identify what you can use confidently and repeatedly, what you have tried, and what would help your work next.</p>
+      <div class="map-line" aria-label="Human AI learning progression">
+        <div class="map-stage historical-map"><strong>ASSIST</strong><span>I use software assistance</span></div>
+        <div class="map-stage historical-map"><strong>SUGGEST</strong><span>I judge suggestions</span></div>
+        <div class="map-stage"><strong>ASK</strong><span>I describe intent</span></div>
+        <div class="map-stage"><strong>COLLABORATE</strong><span>I iterate with AI</span></div>
+        <div class="map-stage"><strong>ORIENT</strong><span>I provide context &amp; instructions</span></div>
+        <div class="map-stage"><strong>TEACH</strong><span>I capture reusable know-how</span></div>
+        <div class="map-stage"><strong>ENABLE</strong><span>I connect useful tools</span></div>
+        <div class="map-stage"><strong>DELEGATE</strong><span>I give bounded goals</span></div>
+        <div class="map-stage"><strong>ORCHESTRATE</strong><span>I design human + AI workflows</span></div>
+      </div>
+      <div class="map-key">
+        <div class="key-item"><span class="key-dot"></span><span><strong>Comfortable:</strong> I can do this repeatedly</span></div>
+        <div class="key-item"><span class="key-ring"></span><span><strong>Experimented:</strong> I have tried this</span></div>
+        <div class="key-item"><span class="key-star">★</span><span><strong>Next:</strong> I want to learn this</span></div>
+      </div>
+      <div class="assess-grid">
+        <div class="assess"><strong>Where am I comfortable today?</strong>Mark practices you can use intentionally and repeatably—not simply something you tried once.</div>
+        <div class="assess"><strong>What have I experimented with?</strong>Trying an agent does not automatically make someone “advanced.” Experimentation is part of learning.</div>
+        <div class="assess"><strong>What would help me next?</strong>Choose the next practice that helps you do real work better. It may not be the farthest step on the line.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 id="loop">The human loop never goes away</h2>
+    <p class="sub">Define → Direct → Check → Adjust is the universal loop. Evaluation is not the final stage. It is present from the beginning—whether you are a first-time AI user, a vibe coder, an experienced engineer, or someone orchestrating agents.</p>
+    <div class="loop">
+      <div class="pill">DEFINE</div><div class="arrow">→</div>
+      <div class="pill">DIRECT</div><div class="arrow">→</div>
+      <div class="pill">CHECK</div><div class="arrow">→</div>
+      <div class="pill">ADJUST</div><div class="arrow">↻</div>
+    </div>
+    <p class="lead">What changes is the amount and complexity of work that happens between <strong>Direct</strong> and <strong>Check</strong>—and the strength of the evidence needed to trust the result.</p>
+  </section>
+
+  <section aria-labelledby="check">
+    <div class="eyebrow">A skill you can build from day one</div>
+    <h2 id="check">Checking grows with you</h2>
+    <p class="sub">CHECK is not synonymous with “review the code.” You can start by observing what the result does, then learn to inspect its important pieces and test it more systematically.</p>
+    <div class="question">
+      <div class="eyebrow">The question to keep asking</div>
+      <blockquote>“What would convince me this is right?”</blockquote>
+      <p>You don’t have to understand every line of code to begin checking. Start with behavior you can observe. As capability and stakes increase, <strong>the strength of the evidence should increase too.</strong></p>
+    </div>
+    <ol class="checks" aria-label="CHECK progression">
+      <li class="check"><div><h3>Black-box behavior check</h3><p class="prompt">Does it do what I wanted?</p></div><div class="detail"><p>Use the result and compare its observable behavior with your intent. You do not need to understand its internal implementation to begin.</p><p class="example"><strong>Example:</strong> Add an item to a checklist, mark it complete, and confirm that the completed count changes correctly.</p></div></li>
+      <li class="check"><div><h3>Gray-box understanding &amp; inspection</h3><p class="prompt">Can I understand the important pieces?</p></div><div class="detail"><p>Ask AI to explain what it did. Inspect relevant inputs, outputs, logs, settings, behavior, or small pieces of code. Use the explanation to guide inspection; the explanation alone is not proof.</p><p class="example"><strong>Example:</strong> Find out where checklist items are stored, then reload the page to see whether the result matches that explanation.</p></div></li>
+      <li class="check"><div><h3>Evidence-based check</h3><p class="prompt">Can I test it systematically?</p></div><div class="detail"><p>Use acceptance criteria, test cases, comparisons with known results, or another person’s review. Record expected and actual outcomes, including cases where something might go wrong.</p><p class="example"><strong>Example:</strong> Check empty items, long labels, repeated clicks, and reloading against written requirements. Ask someone else to try the workflow.</p></div></li>
+      <li class="check"><div><h3>Engineering check</h3><p class="prompt">Is it fit for dependable use?</p></div><div class="detail"><p>Check automated test results and assess security, maintainability, reliability, performance, and architectural soundness. Use appropriate expert review and evidence tied to the intended use.</p><p class="example"><strong>Example:</strong> Before launching a shared checklist service, test access controls, concurrent edits, recovery after failures, and expected load.</p></div></li>
+    </ol>
+    <p class="small">Each level builds on the earlier checks. These are learning steps, not mutually exclusive categories: engineering checks still include observable behavior and systematic evidence.</p>
+    <div class="bigidea"><strong>“It looks like it works” is a starting observation, not sufficient evidence for every use.</strong> As the work becomes more consequential, strengthen the checks. When the required checks exceed your current skills, involve a qualified reviewer or keep the use limited until you have adequate evidence.</div>
+    <div class="stakes">
+      <div class="card"><h3>A personal prototype</h3><p>Start small, use sample data, and check observable behavior. Keep the experiment reversible, note its limits, and learn from what happens.</p></div>
+      <div class="card"><h3>A production system</h3><p>Require stronger evidence before relying on it: systematic tests, appropriate expert review, and checks for the failure modes that matter in real use.</p></div>
+    </div>
+    <div class="flow">Define something small → Direct AI → Check observable behavior → Adjust → Repeat</div>
+    <p class="sub">The same habit works for writing, research, planning, and code. Choose evidence that fits the task and its stakes.</p>
+  </section>
+  <section>
+    <h2>Define does not mean “write the complete spec”</h2>
+    <p class="sub">Often we do not yet know exactly what we want. Definition can begin with enough understanding to take the next useful step.</p>
+    <div class="grid">
+      <div class="card"><h3>Discover</h3><p>Explore the problem, users, possibilities, constraints and unknowns. Use AI to question assumptions and expose options.</p></div>
+      <div class="card"><h3>Define</h3><p>State what is known now: intent, desired outcome, boundaries and the next thing worth learning.</p></div>
+      <div class="card"><h3>Specify</h3><p>As knowledge increases, capture requirements, architecture, acceptance criteria and interfaces with greater precision.</p></div>
+    </div>
+    <div class="flow">Idea → Intent → Exploration → Prototype → Requirements → Specification → Implementation</div>
+    <div class="bigidea"><strong>A spec can be an output of learning—not a prerequisite for learning.</strong></div>
+  </section>
+
+  <section>
+    <h2>This is familiar: Agile was solving the same uncertainty</h2>
+    <div class="timeline">
+      <div class="card">
+        <h3>Traditional / Plan-driven</h3>
+        <p class="flow">Understand → Specify → Design → Build → Test → Deliver</p>
+        <p class="small">Works best when enough can be known and stabilized before implementation.</p>
+      </div>
+      <div class="card">
+        <h3>Agile</h3>
+        <p class="flow">Intent → Build → Feedback → Learn → Adjust → Repeat</p>
+        <p class="small">Build enough to learn what should be defined next.</p>
+      </div>
+      <div class="card">
+        <h3>AI / Agentic Engineering</h3>
+        <p class="flow">Intent → AI Builds → Human Checks → Learn → Redirect → Repeat</p>
+        <p class="small">The learning loop can become dramatically faster, but verification remains essential.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What actually changes?</h2>
+    <p class="sub">The fundamental engineering problem—learning what should be built—remains. AI compresses the cost and time of trying, seeing and adjusting.</p>
+    <div class="grid">
+      <div class="card"><h3>Early tools</h3><p><strong>You type.</strong><br>I help you finish it.</p></div>
+      <div class="card"><h3>LLM collaboration</h3><p><strong>You express intent.</strong><br>We explore and build together.</p></div>
+      <div class="card"><h3>Agentic engineering</h3><p><strong>You provide goals and boundaries.</strong><br>The agent can plan, act, use tools and return evidence for review.</p></div>
+    </div>
+    <div class="bigidea">Agentic engineering does not replace Agile's lesson. It can <strong>accelerate the build → learn → define loop</strong> while preserving human judgment.</div>
+  </section>
+
+  <aside class="closing" aria-label="Guiding principle">
+    <h2>Start where you are. Move one step.</h2>
+    <p>Ask: <strong>“What would convince me this is right?”</strong><br>Check at the level you can—and strengthen how you check as the work becomes more consequential. The goal is not to reach the end of the line; it is to use the right practices for the work in front of you.</p>
+  </aside>
+  <footer>
+    Human learning progression · Multiple entry points · Define → Direct → Check → Adjust<br>ASSIST / SUGGEST: historical developer stages. ASK: an entry point for new AI users.
+  </footer>
+</main>
+</body>
+</html>

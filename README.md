@@ -35,4 +35,3 @@ Edit the workshop Markdown files or `learning-path.md` to update the learning co
 Install the build dependency with `python -m pip install -r requirements-site.txt`, then run `python scripts/build_site.py`. Preview with `python -m http.server 8765 --directory docs` and open `http://localhost:8765`.
 
 Changes pushed to `main` trigger `.github/workflows/pages.yml`, which rebuilds and publishes the website. In repository Settings → Pages, select **GitHub Actions** as the source. See [GitHub Pages publishing guidance](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
-
