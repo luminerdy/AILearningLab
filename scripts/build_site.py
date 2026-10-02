@@ -28,16 +28,13 @@ def shell(title, content, active=''):
 <main id="main">{content}</main><footer><strong>AI Learning Lab</strong><span>Start where you are. Move one step.</span><a href="https://github.com/luminerdy/AILearningLab">View on GitHub</a></footer></body></html>'''
 
 def rewrite_links(body):
+    body = body.replace('href="agentic-ai-learning-progression-updated.html"', 'href="full-progression.html"')
     for source, (target, _, _) in PAGES.items():
         body = body.replace(f'href="{source}"', f'href="{target}"')
     return body
 
 for source, (target, title, label) in PAGES.items():
     text = (ROOT / source).read_text(encoding='utf-8')
-    # Keep internal planning and source provenance in the repository, off student pages.
-    if source == 'workshop-facilitator-guide.md':
-        text = text.split('## Source basis')[0]
-        text = re.sub(r'The user is considering.*?\n\n', 'Use the access arrangement agreed with your school or workshop organizer. The introductory exercises use ordinary text requests and supplied facts.\n\n', text, flags=re.S)
     md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc'])
     body = rewrite_links(md.convert(text))
     body = re.sub(r'<table>(.*?)</table>', r'<div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>\1</table></div>', body, flags=re.S)

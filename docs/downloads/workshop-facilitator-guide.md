@@ -19,7 +19,7 @@ ASK is the entry point. Iteration introduces COLLABORATE naturally. Show the ful
 
 Provide a school-approved AI tool, the student workbook, a timer, and a shared display. Follow the school's existing access and academic-use rules. Use the fictional scenario below so participation requires no personal information or uploads. Test the scenario in the chosen tool before class; save one response for a demonstration if access fails. AI responses will vary, so the answer key checks requirements rather than exact wording.
 
-The user is considering students providing their own ChatGPT Plus accounts. This is a proposed access arrangement, not a confirmed purchase requirement. Official OpenAI [pricing](https://learn.chatgpt.com/docs/pricing), checked October 2, 2026, lists Plus at $20 per month. These opening text exercises do not depend on a paid-only feature. Confirm the final access arrangement, student account eligibility, and school requirements before distributing enrollment instructions. The consulted documentation did not establish the consumer account age and consent requirements.
+Tell students which AI tool and account they need before the workshop. Confirm student account eligibility and school requirements when preparing enrollment instructions. The opening exercises use ordinary text requests and supplied facts.
 
 Pairs work well: one student directs AI while the other checks the result; switch roles halfway through. If only the instructor has access, pairs write requests on paper, select several to run on the shared screen, and independently check the displayed output. If no AI is available, use a saved response to practice checking and write the next request students would send.
 
@@ -120,6 +120,6 @@ Explain how checking can grow: observe behavior; inspect important pieces; colle
 
 After the pilot, record where students got stuck, which checks they could perform independently, how AI access affected participation, and whether the timing worked. Collect one specific improvement suggestion from students. Use that evidence to revise the workshop before adding more stages.
 
-## Source basis
+## Learning framework
 
-The learning progression, inclusive ASK entry point, self-location approach, checking model, and iterative learning philosophy come from `agentic-ai-learning-progression-updated.html`. The intention to start a student workshop at ASK and keep it reusable for older audiences comes from `agentic-ai-human-learning-progression-transcript.md`, which is explicitly incomplete. The schedule, fictional scenario, exercises, and assessment checklist are new proposed workshop design.
+Use the [human learning progression](agentic-ai-learning-progression-updated.html) to explore the inclusive ASK entry point, self-location approach, checking model, and iterative learning philosophy. The workshop applies these ideas through a fictional event, paired practice, and evidence-based reflection.
