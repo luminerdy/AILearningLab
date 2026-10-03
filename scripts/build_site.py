@@ -20,6 +20,12 @@ PAGES = {
 }
 
 def shell(title, content, active=''):
+    diagram_script = ''
+    if 'class="mermaid"' in content:
+        diagram_script = '''<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:true,securityLevel:'strict',theme:'neutral',flowchart:{useMaxWidth:true,htmlLabels:false}});
+</script>'''
     nav = [('index.html', 'Home'), ('workshop.html', 'Workshop'), ('labs.html', 'More labs'), ('progression.html', 'Learning map'), ('instructors.html', 'For instructors')]
     links = ''.join(f'<a href="{url}"' + (' aria-current="page"' if url == active else '') + f'>{label}</a>' for url, label in nav)
     return f'''<!doctype html>
@@ -27,7 +33,7 @@ def shell(title, content, active=''):
 <title>{html.escape(title)} | AI Learning Lab</title><meta name="description" content="Student workshops and hands-on labs for learning to work with AI. Start at ASK and practice Define, Direct, Check, Adjust.">
 <link rel="stylesheet" href="assets/site.css"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"></head>
 <body><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="index.html"><span class="mark" aria-hidden="true">AI</span>Learning Lab</a><nav aria-label="Main navigation">{links}</nav></header>
-<main id="main">{content}</main><footer><strong>AI Learning Lab</strong><span>Start where you are. Move one step.</span><a href="https://github.com/luminerdy/AILearningLab">View on GitHub</a></footer></body></html>'''
+<main id="main">{content}</main><footer><strong>AI Learning Lab</strong><span>Start where you are. Move one step.</span><a href="https://github.com/luminerdy/AILearningLab">View on GitHub</a></footer>{diagram_script}</body></html>'''
 
 def rewrite_links(body):
     for source, (target, _, _) in PAGES.items():
@@ -38,6 +44,7 @@ for source, (target, title, label) in PAGES.items():
     text = (ROOT / source).read_text(encoding='utf-8')
     md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc'])
     body = rewrite_links(md.convert(text))
+    body = re.sub(r'<pre><code class="language-mermaid">(.*?)</code></pre>', r'<div class="diagram"><pre class="mermaid">\1</pre></div>', body, flags=re.S)
     body = re.sub(r'<table>(.*?)</table>', r'<div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>\1</table></div>', body, flags=re.S)
     download = f'<a class="text-link" href="downloads/{source}" download>Download editable Markdown</a>'
     content = f'<div class="page-intro"><p class="eyebrow">{label}</p>{download}</div><div class="reading-layout"><aside class="contents"><h2>On this page</h2>{md.toc}</aside><article class="prose">{body}</article></div>'

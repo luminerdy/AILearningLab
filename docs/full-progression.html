@@ -55,6 +55,24 @@ ASSIST and SUGGEST describe earlier tool experiences, not prerequisites.</p>
 <p>↓ New AI users can enter at ASK</p>
 <p><strong>ASK</strong> → COLLABORATE → ORIENT → TEACH → ENABLE → DELEGATE → ORCHESTRATE</p>
 <p>Start with the practice that fits your task. Move among these practices as you learn; the progression is not a prerequisite chain.</p>
+<div class="diagram"><pre class="mermaid">flowchart TD
+    accTitle: Human AI learning progression with an ASK entry point
+    accDescr: ASSIST and SUGGEST are historical developer experiences. New learners can enter at ASK. Later practices are options to explore rather than required stages.
+    subgraph history[Historical developer experiences]
+        assist[&quot;ASSIST: software assistance&quot;] --&gt; suggest[&quot;SUGGEST: judge suggestions&quot;]
+    end
+    suggest -.-&gt; ask[&quot;ASK: describe intent&quot;]
+    entry[&quot;New AI users: start here&quot;] --&gt; ask
+    ask -.-&gt; collaborate[&quot;COLLABORATE: iterate with AI&quot;]
+    collaborate -.-&gt; orient[&quot;ORIENT: provide context and instructions&quot;]
+    orient -.-&gt; teach[&quot;TEACH: capture reusable know-how&quot;]
+    teach -.-&gt; enable[&quot;ENABLE: connect useful tools&quot;]
+    enable -.-&gt; delegate[&quot;DELEGATE: give bounded goals&quot;]
+    delegate -.-&gt; orchestrate[&quot;ORCHESTRATE: design human and AI workflows&quot;]
+    classDef entryPoint fill:#dceff0,stroke:#007b70,stroke-width:3px,color:#102c40
+    class ask,entry entryPoint
+</pre></div>
+<p>The dotted connections show practices you can explore. Move among them as needed; they are not prerequisites or a maturity ranking.</p>
 <h2 id="the-progression">The progression</h2>
 <p>This is a learning progression for the human, not simply a list of AI technologies. It describes practices you can grow into and return to—not prerequisites you must complete in order.</p>
 <ul>
@@ -127,6 +145,14 @@ ASSIST and SUGGEST describe earlier tool experiences, not prerequisites.</p>
 <h2 id="the-human-loop-never-goes-away">The human loop never goes away</h2>
 <p>Define → Direct → Check → Adjust is the universal loop. Evaluation is not the final stage. It is present from the beginning—whether you are a first-time AI user, a vibe coder, an experienced engineer, or someone orchestrating agents.</p>
 <p><strong>DEFINE → DIRECT → CHECK → ADJUST → Repeat</strong></p>
+<div class="diagram"><pre class="mermaid">flowchart LR
+    accTitle: The human learning loop
+    accDescr: Define the goal, direct AI, check the result, and adjust. Return to defining as learning changes the goal.
+    define[&quot;DEFINE: goal and criteria&quot;] --&gt; direct[&quot;DIRECT: request and context&quot;]
+    direct --&gt; check[&quot;CHECK: inspect evidence&quot;]
+    check --&gt; adjust[&quot;ADJUST: improve the next attempt&quot;]
+    adjust --&gt; define
+</pre></div>
 <p>What changes is the amount and complexity of work that happens between <strong>Direct</strong> and <strong>Check</strong>—and the strength of the evidence needed to trust the result.</p>
 <h2 id="checking-grows-with-you">Checking grows with you</h2>
 <p>CHECK is not synonymous with “review the code.” You can start by observing what the result does, then learn to inspect its important pieces and test it more systematically.</p>
@@ -134,6 +160,14 @@ ASSIST and SUGGEST describe earlier tool experiences, not prerequisites.</p>
 <p>“What would convince me this is right?”</p>
 </blockquote>
 <p>You don’t have to understand every line of code to begin checking. Start with behavior you can observe. As capability and stakes increase, <strong>the strength of the evidence should increase too.</strong></p>
+<div class="diagram"><pre class="mermaid">flowchart TD
+    accTitle: Checking becomes stronger as the work requires more evidence
+    accDescr: Observable behavior, inspection, systematic evidence, and engineering checks build on one another. Choose checks suited to the task and its consequences.
+    behavior[&quot;Black-box: observe behavior&quot;] --&gt; inspection[&quot;Gray-box: inspect important pieces&quot;]
+    inspection --&gt; evidence[&quot;Evidence-based: test against criteria&quot;]
+    evidence --&gt; engineering[&quot;Engineering: establish dependable use&quot;]
+</pre></div>
+<p>Each layer includes the earlier checks. Choose the evidence your task requires; every exercise does not need production-level engineering checks.</p>
 <h3 id="black-box-behavior-check">Black-box behavior check</h3>
 <p>Does it do what I wanted?</p>
 <p>Use the result and compare its observable behavior with your intent. You do not need to understand its internal implementation to begin.</p>
@@ -192,4 +226,7 @@ The agent can plan, act, use tools and return evidence for review.</p>
 <p>Agentic engineering does not replace Agile's lesson. It can <strong>accelerate the build → learn → define loop</strong> while preserving human judgment.</p>
 <h2 id="start-where-you-are-move-one-step">Start where you are. Move one step.</h2>
 <p>Ask: <strong>“What would convince me this is right?”</strong>
-Check at the level you can—and strengthen how you check as the work becomes more consequential. The goal is not to reach the end of the line; it is to use the right practices for the work in front of you.</p></article></div></main><footer><strong>AI Learning Lab</strong><span>Start where you are. Move one step.</span><a href="https://github.com/luminerdy/AILearningLab">View on GitHub</a></footer></body></html>
+Check at the level you can—and strengthen how you check as the work becomes more consequential. The goal is not to reach the end of the line; it is to use the right practices for the work in front of you.</p></article></div></main><footer><strong>AI Learning Lab</strong><span>Start where you are. Move one step.</span><a href="https://github.com/luminerdy/AILearningLab">View on GitHub</a></footer><script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+mermaid.initialize({startOnLoad:true,securityLevel:'strict',theme:'neutral',flowchart:{useMaxWidth:true,htmlLabels:false}});
+</script></body></html>
