@@ -1,32 +1,26 @@
 # AI Learning Lab
 
-Learn to work with AI through practice, evidence, and reflection. Start at **ASK** using everyday language. Use **Define → Direct → Check → Adjust** to improve a result and explain why it meets your goal.
+Learn to work with AI through practice, evidence, and reflection.
 
-Visit the [AI Learning Lab website](https://luminerdy.github.io/AILearningLab/) to start learning.
+**Students and instructors: use the [AI Learning Lab website](https://luminerdy.github.io/AILearningLab/).** All training materials and editable downloads are available there.
 
-Teach and learn from the [Workshop](https://luminerdy.github.io/AILearningLab/workshop.html): **LLM Basics → Lab 1 Ask → Lab 2 Check and Adjust → Lab 3 Your Challenge → Keep Learning**. Each lesson links to the previous and next step. The Markdown files below provide editable copies of the training materials.
+- [Start the workshop](https://luminerdy.github.io/AILearningLab/workshop.html)
+- [LLM basics](https://luminerdy.github.io/AILearningLab/llm-basics.html)
+- [Instructor guide](https://luminerdy.github.io/AILearningLab/instructors.html)
+- [Student workbook](https://luminerdy.github.io/AILearningLab/workbook.html)
+- [Keep learning](https://luminerdy.github.io/AILearningLab/labs.html)
+- [Human learning progression](https://luminerdy.github.io/AILearningLab/full-progression.html)
 
-Use these materials for a three-hour introductory workshop, several class sessions, or independent practice afterward. No coding experience is required.
+## Maintain the website
 
-Complete each lab individually. Talk with classmates, compare approaches, and ask for help as you work. Keep your own requests, results, checks, and revisions.
+This repository holds the website's build sources. Edit curriculum in `site/content/`, styling in `site/assets/`, and page generation in `scripts/build_site.py`.
 
-## Start the workshop
+To preview a build:
 
-- Start with [LLM basics](llm-basics.md) for tokens, prompts, context, and hallucinations.
-- Instructors: use the [facilitator guide](workshop-facilitator-guide.md) for preparation, the three-hour agenda, demonstration, exercises, and assessment.
-- Students: work through the [student workbook](workshop-student-workbook.md), saving your requests, results, checks, and revisions.
-- After the workshop: choose a lab from the [continued learning path](learning-path.md).
+```sh
+python -m pip install -r requirements-site.txt
+python scripts/build_site.py
+python -m http.server --directory docs 8000
+```
 
-Before the workshop, check with your instructor or organizer about which AI tool and account to use. The introductory tasks use text requests and supplied facts.
-
-## Keep learning
-
-The progression is **ASK → COLLABORATE → ORIENT → TEACH → ENABLE → DELEGATE → ORCHESTRATE**. Choose practices that help your task. You do not need to reach the end of the line. Historical ASSIST and SUGGEST stages are not prerequisites.
-
-For each exercise, save a goal, request, result, checks, revision, and reflection. Use fictional or non-sensitive examples when sharing work. You can read the materials on GitHub without creating a repository of your own; keep work locally or in the class system unless your instructor asks you to publish it.
-
-## Explore the learning framework
-
-- [Human learning progression](agentic-ai-learning-progression-updated.md) explains the framework, checking progression, and self-location map.
-
-Keep asking **“What would convince me this is right?”** Use what you learn from each result to choose your next useful step.
+Pushing to `main` builds and deploys GitHub Pages through GitHub Actions. Generated `docs/` files are not committed; the website is the reading destination for the training materials.

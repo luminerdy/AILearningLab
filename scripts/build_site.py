@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '.site-tools'))
 import markdown
 
+CONTENT = ROOT / 'site' / 'content'
 OUT = ROOT / 'docs'
 OUT.mkdir(exist_ok=True)
 PAGES = {
@@ -163,9 +164,9 @@ def progression_layout(body, download):
     return '<div class="progression-download">' + download + '</div>' + ET.tostring(output, encoding='unicode', method='html')
 
 for source, (target, title, label) in PAGES.items():
-    write_lesson((ROOT / source).read_text(encoding='utf-8'), target, title, label, source)
+    write_lesson((CONTENT / source).read_text(encoding='utf-8'), target, title, label, source)
 
-workbook = (ROOT / 'workshop-student-workbook.md').read_text(encoding='utf-8')
+workbook = (CONTENT / 'workshop-student-workbook.md').read_text(encoding='utf-8')
 def portion(start, end=None):
     return workbook.split(start, 1)[1].split(end, 1)[0] if end else workbook.split(start, 1)[1]
 start = portion('## Your starting point', '## LLM basics warmup')
@@ -193,8 +194,10 @@ progression = f'''<section class="map-intro"><p class="eyebrow">HUMAN LEARNING P
 (OUT / 'progression.html').write_text(shell('Learning map', progression, 'progression.html'), encoding='utf-8')
 (OUT / 'downloads').mkdir(exist_ok=True)
 for source in PAGES:
-    shutil.copy2(ROOT / source, OUT / 'downloads' / source)
+    shutil.copy2(CONTENT / source, OUT / 'downloads' / source)
 shutil.copytree(ROOT / 'site' / 'assets', OUT / 'assets', dirs_exist_ok=True)
 (OUT / '.nojekyll').touch()
 (OUT / '404.html').write_text(shell('Page not found', '<section class="map-intro"><p class="eyebrow">PAGE NOT FOUND</p><h1>Find your next practice.</h1><p>This page may have moved as the lab develops.</p><a class="button" href="/AILearningLab/">Return to AI Learning Lab</a></section>'), encoding='utf-8')
 print(f'Built {len(list(OUT.glob("*.html")))} HTML pages in {OUT}')
+
+

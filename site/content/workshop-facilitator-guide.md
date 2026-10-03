@@ -2,7 +2,7 @@
 
 This first workshop teaches students to use AI for a small, useful task and judge the result. Students leave with an initial request, a checked result, a revision, and evidence explaining what improved. The central habit is **Define → Direct → Check → Adjust**.
 
-The live introduction is three hours for high school beginners, adaptable to older learners. It can be split into three one-hour classes and expanded into several days using the follow-on labs in `learning-path.md`. No coding experience is required. Use the companion `workshop-student-workbook.md` during the session. The GitHub learning resource extends beyond the live workshop.
+The live introduction is three hours for high school beginners, adaptable to older learners. It can be split into three one-hour classes and expanded into several days using the [follow-on labs](learning-path.md). No coding experience is required. Use the [student workbook](workshop-student-workbook.md) during the session. The website provides continued learning beyond the live workshop.
 
 ## Learning outcomes
 
@@ -143,3 +143,4 @@ After the pilot, record where students got stuck, which checks they could perfor
 ## Learning framework
 
 Use the [human learning progression](agentic-ai-learning-progression-updated.md) to explore the inclusive ASK entry point, self-location approach, checking model, and iterative learning philosophy. The workshop applies these ideas through a fictional event, individual practice, and evidence-based reflection.
+

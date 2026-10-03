@@ -6,3 +6,5 @@ __pycache__/
 *.log
 AGENTS.md
 agentic-ai-human-learning-progression-transcript.md
+
+docs/
