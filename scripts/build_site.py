@@ -14,6 +14,9 @@ CONTENT = ROOT / 'site' / 'content'
 OUT = ROOT / 'docs'
 OUT.mkdir(exist_ok=True)
 PAGES = {
+    'collaborate.md': ('collaborate.html', 'COLLABORATE workshop', 'CHOOSE YOUR PRACTICE'),
+    'collaborate-workbook.md': ('collaborate-workbook.html', 'COLLABORATE workbook', 'WORKSHOP REFERENCE'),
+    'collaborate-instructors.md': ('collaborate-instructors.html', 'Teaching COLLABORATE', 'FOR INSTRUCTORS'),
     'llm-basics.md': ('llm-basics.html', 'LLM basics', 'BEFORE YOU BEGIN'),
     'agentic-ai-learning-progression-updated.md': ('full-progression.html', 'Human learning progression', 'THE FULL LEARNING FRAMEWORK'),
     'workshop-student-workbook.md': ('workbook.html', 'Complete student workbook', 'WORKSHOP REFERENCE'),
@@ -28,14 +31,22 @@ SEQUENCE = [
     ('labs.html', 'Keep Learning'),
 ]
 
+COLLABORATE_SEQUENCE = [
+    ('collaborate-1.html', 'Lab 1 — Notice and Compare'),
+    ('collaborate-2.html', 'Lab 2 — Change and Check'),
+    ('collaborate-3.html', 'Lab 3 — Improve and Teach'),
+]
+
 def lesson_navigation(target):
-    if target not in [url for url, _ in SEQUENCE]:
+    sequence = COLLABORATE_SEQUENCE if target in [url for url, _ in COLLABORATE_SEQUENCE] else SEQUENCE
+    overview = ('collaborate.html', 'COLLABORATE overview') if sequence is COLLABORATE_SEQUENCE else ('workshop.html', 'Workshop overview')
+    if target not in [url for url, _ in sequence]:
         return '', ''
-    i = next(i for i, (url, _) in enumerate(SEQUENCE) if url == target)
-    items = ''.join(f'<li><a href="{url}"' + (' aria-current="page"' if url == target else '') + f'>{html.escape(label)}</a></li>' for url, label in SEQUENCE)
-    before = SEQUENCE[i-1] if i else ('workshop.html', 'Workshop overview')
-    after = SEQUENCE[i+1] if i+1 < len(SEQUENCE) else ('workshop.html', 'Workshop overview')
-    return f'<nav class="lesson-sequence" aria-label="Workshop sequence"><h2>Workshop</h2><ol>{items}</ol></nav>', f'<nav class="lesson-pagination" aria-label="Lesson navigation"><a href="{before[0]}">Previous: {html.escape(before[1])}</a><a href="{after[0]}">Next: {html.escape(after[1])}</a></nav>'
+    i = next(i for i, (url, _) in enumerate(sequence) if url == target)
+    items = ''.join(f'<li><a href="{url}"' + (' aria-current="page"' if url == target else '') + f'>{html.escape(label)}</a></li>' for url, label in sequence)
+    before = sequence[i-1] if i else overview
+    after = sequence[i+1] if i+1 < len(sequence) else overview
+    return f'<nav class="lesson-sequence" aria-label="Workshop sequence"><h2>{"COLLABORATE" if sequence is COLLABORATE_SEQUENCE else "Workshop"}</h2><ol>{items}</ol></nav>', f'<nav class="lesson-pagination" aria-label="Lesson navigation"><a href="{before[0]}">Previous: {html.escape(before[1])}</a><a href="{after[0]}">Next: {html.escape(after[1])}</a></nav>'
 
 def shell(title, content, active=''):
     is_progression = active == 'full-progression.html'
@@ -43,6 +54,8 @@ def shell(title, content, active=''):
     page_class = ' class="full-progression"' if is_progression else ''
     if active in [url for url, _ in SEQUENCE[:-1]] or active == 'workbook.html':
         active = 'workshop.html'
+    if active.startswith('collaborate'):
+        active = 'labs.html'
     nav = [('index.html', 'Home'), ('workshop.html', 'Workshop'), ('labs.html', 'More labs'), ('progression.html', 'Learning map'), ('instructors.html', 'For instructors')]
     links = ''.join(f'<a href="{url}"' + (' aria-current="page"' if url == active else '') + f'>{label}</a>' for url, label in nav)
     return f'''<!doctype html>
@@ -177,12 +190,17 @@ for heading, end, target, title, label in [
     text = '# ' + heading.removeprefix('## ') + '\n\n' + (starting + '\n' if target == 'lab-1-ask.html' else '') + portion(heading, end)
     write_lesson(text, target, title, label, 'workshop-student-workbook.md')
 
+collaborate = (CONTENT / 'collaborate-workbook.md').read_text(encoding='utf-8')
+for i, heading in enumerate(['Lab 1 Notice and Compare', 'Lab 2 Change and Check', 'Lab 3 Improve and Teach'], 1):
+    text = '# ' + heading + '\n\n' + collaborate.split('## ' + heading, 1)[1].split('\n## Lab ', 1)[0]
+    write_lesson(text, f'collaborate-{i}.html', heading, 'COLLABORATE', 'collaborate-workbook.md')
+
 steps = ''.join(f'<a class="card" href="{url}"><span class="card-number">{i+1:02} / WORKSHOP</span><h2>{html.escape(label)}</h2><span class="card-link">Open lesson</span></a>' for i, (url, label) in enumerate(SEQUENCE))
-overview = f'''<section class="map-intro"><p class="eyebrow">LEARN, BUILD, TEACH</p><h1>Learn something new.<br>Help someone else learn.</h1><p class="lead">Use a Raspberry Pi 500 and Codex CLI to explore something unfamiliar, build and check a working project, and create a DIY or STEM outreach lab. Work individually with open discussion and help.</p><a class="button" href="llm-basics.html">Begin with LLM Basics</a></section><section class="route"><h2>Follow the workshop</h2><p>First-pass format: three two-hour sessions, with extra time for hardware when needed. A three-hour introduction covers an initial build; the complete teaching lab continues afterward.</p><div class="cards">{steps}</div></section><section class="prose"><h2>Teaching or saving your work?</h2><p>Use the <a href="instructors.html">instructor guide</a> for timing, demonstrations, and teaching notes in this same sequence. The <a href="workbook.html">complete student workbook</a> brings all recording prompts together and includes a Markdown download.</p><p>After the workshop, choose a follow-on lab from Keep Learning. You can return to any lesson when it helps your work.</p></section>'''
+overview = f'''<section class="map-intro"><p class="eyebrow">LEARN, BUILD, TEACH</p><h1>Learn something new.<br>Help someone else learn.</h1><p class="lead">Use a Raspberry Pi 500 and Codex CLI to explore something unfamiliar, build and check a working project, and create a DIY or STEM outreach lab. Work individually with open discussion and help.</p><a class="button" href="llm-basics.html">Begin with LLM Basics</a></section><section class="route"><h2>Follow the workshop</h2><p>First-pass format: three two-hour sessions, with extra time for hardware when needed. A three-hour introduction covers an initial build; the complete teaching lab continues afterward.</p><div class="cards">{steps}</div></section><section class="prose"><h2>Teaching or saving your work?</h2><p>Use the <a href="instructors.html">instructor guide</a> for timing, demonstrations, and teaching notes in this same sequence. The <a href="workbook.html">complete student workbook</a> brings all recording prompts together and includes a Markdown download.</p><p>You can also start with <a href="collaborate.html">COLLABORATE</a> using your own small project or a prepared starter. ASK completion is not required. Choose the practice that helps you now. You can return to any lesson when it helps your work.</p></section>'''
 (OUT / 'workshop.html').write_text(shell('Workshop', overview, 'workshop.html'), encoding='utf-8')
 
 home = '''<section class="opening"><div><p class="eyebrow">A PRACTICE SPACE FOR WORKING WITH AI</p><h1>Ask. Try.<br>Check. Improve.</h1><p class="lead">Use AI to learn something you do not know how to do. Build a working project, check it, and create a lab that helps others learn. Start with everyday language; no coding experience needed.</p><div class="actions"><a class="button" href="workshop.html">Start the student workshop</a><a class="text-link" href="instructors.html">Teaching a group?</a></div><p class="meta">Raspberry Pi 500 + Codex CLI · Individual projects and open discussion · Multiple sessions</p></div><div class="loop-panel"><p class="eyebrow">YOUR LEARNING LOOP</p><ol><li><span>01</span><div><strong>Define</strong><p>What do I want to accomplish?</p></div></li><li><span>02</span><div><strong>Direct</strong><p>What does AI need to know?</p></div></li><li><span>03</span><div><strong>Check</strong><p>What would convince me this is right?</p></div></li><li><span>04</span><div><strong>Adjust</strong><p>What should I change and try again?</p></div></li></ol><p class="loop-note">Repeat as you learn.</p></div></section>
-<section class="route"><div class="section-heading"><p class="eyebrow">CHOOSE YOUR NEXT PRACTICE</p><h2>The workshop is your starting point.</h2><p>Make something small, test it against your goal, and build from there.</p></div><div class="cards"><a class="card" href="workshop.html"><span class="card-number">01 / START</span><h3>Learn to ASK</h3><p>Choose an unfamiliar project. Ask useful questions, build a small version, check and improve it, then create a DIY or STEM outreach lab.</p><span class="card-link">Open the workshop</span></a><a class="card" href="labs.html"><span class="card-number">02 / PRACTICE</span><h3>Keep experimenting</h3><p>Extend your project, investigate how it works, add prepared hardware, or adapt your tested lab for a new audience.</p><span class="card-link">Explore the labs</span></a><a class="card" href="progression.html"><span class="card-number">03 / REFLECT</span><h3>Find your next step</h3><p>Notice what you can repeat confidently, what you have tried, and what would help your work next.</p><span class="card-link">View the learning map</span></a></div></section>
+<section class="route"><div class="section-heading"><p class="eyebrow">CHOOSE YOUR NEXT PRACTICE</p><h2>The workshop is your starting point.</h2><p>Make something small, test it against your goal, and build from there.</p></div><div class="cards"><a class="card" href="workshop.html"><span class="card-number">01 / START</span><h3>Learn to ASK</h3><p>Choose an unfamiliar project. Ask useful questions, build a small version, check and improve it, then create a DIY or STEM outreach lab.</p><span class="card-link">Open the workshop</span></a><a class="card" href="labs.html"><span class="card-number">02 / PRACTICE</span><h3>Choose your practice</h3><p>Start with COLLABORATE to improve a small project, or explore another activity. Use your own work or a prepared starter; ASK is not a prerequisite.</p><span class="card-link">Explore the labs</span></a><a class="card" href="progression.html"><span class="card-number">03 / REFLECT</span><h3>Find your next step</h3><p>Notice what you can repeat confidently, what you have tried, and what would help your work next.</p><span class="card-link">View the learning map</span></a></div></section>
 <section class="question"><p class="eyebrow">A HABIT FROM DAY ONE</p><h2>“What would convince me<br>this is right?”</h2><p>Check facts against the information you supplied. Test a result against your criteria. Ask another person to try it. An AI explanation can guide your checks; evidence gives you a reason to trust.</p></section>
 <section class="instructor-strip"><div><h2>Bring the lab into your classroom.</h2><p>Plan multiple sessions for learning, building, checking, and teaching. Start with a three-hour introduction if time is limited.</p></div><a class="button secondary" href="instructors.html">Open the instructor guide</a></section>'''
 (OUT / 'index.html').write_text(shell('Learn to work with AI', home, 'index.html'), encoding='utf-8')

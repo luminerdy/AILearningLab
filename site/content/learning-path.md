@@ -1,6 +1,10 @@
 # Keep Learning: Your Next Build and Teaching Lab
 
-Return to **Define → Direct → Check → Adjust** whenever you want to learn something unfamiliar. These extensions build on your workshop project; choose the one that helps your goal. Time estimates are for planning and are not measured completion times.
+Return to **Define â†’ Direct â†’ Check â†’ Adjust** whenever you want to learn something unfamiliar. Start with the practice that helps your goal. Bring a small project, use a prepared starter, or extend something from a workshop. Time estimates are for planning and are not measured completion times.
+
+## Start with COLLABORATE
+
+Improve a small project and its teaching lab through focused conversation and checked changes. Code-only projects are a complete path. Follow [Notice and Compare → Change and Check → Improve and Teach](collaborate.md), with optional stretch challenges. ASK completion is not required; use your own project or a prepared starter.
 
 ## Save evidence
 
@@ -8,15 +12,15 @@ For every extension, save the learning goal, relevant context, useful questions,
 
 ## Try another small feature
 
-**Estimate: 45–90 minutes.** Choose a feature you do not yet know how to build. Ask AI to explain options, choose the smallest version, predict its behavior, and test it. Include a condition that could fail. Deliver the checked feature and revised lab steps.
+**Estimate: 45â€“90 minutes.** Choose a feature you do not yet know how to build. Ask AI to explain options, choose the smallest version, predict its behavior, and test it. Include a condition that could fail. Deliver the checked feature and revised lab steps.
 
 ## Learn an important piece
 
-**Estimate: 30–60 minutes.** Choose a function, input, or file you do not understand. Ask AI to explain it, then make a small reversible experiment to check the explanation. Predict before running. Deliver your explanation and evidence; note where the AI's account needed correction.
+**Estimate: 30â€“60 minutes.** Choose a function, input, or file you do not understand. Ask AI to explain it, then make a small reversible experiment to check the explanation. Predict before running. Deliver your explanation and evidence; note where the AI's account needed correction.
 
 ## Adapt your lab for outreach
 
-**Estimate: 60–120 minutes plus a trial.** Choose a younger audience or a short club event. Ask AI to help simplify vocabulary, materials, and steps while preserving the learning goal. Prepare a facilitator reference with checked answers. Trial the activity, label who tried it, and revise from observations.
+**Estimate: 60â€“120 minutes plus a trial.** Choose a younger audience or a short club event. Ask AI to help simplify vocabulary, materials, and steps while preserving the learning goal. Prepare a facilitator reference with checked answers. Trial the activity, label who tried it, and revise from observations.
 
 ## Add hardware when ready
 
@@ -24,7 +28,7 @@ For every extension, save the learning goal, relevant context, useful questions,
 
 ## Capture a reusable AI learning procedure
 
-**Estimate: 45–60 minutes.** Write the process you would use next time: describe the unknown, provide context, request a small step, predict, observe, investigate, adjust, and record. Try it on a different small task. Improve the procedure from that experience.
+**Estimate: 45â€“60 minutes.** Write the process you would use next time: describe the unknown, provide context, request a small step, predict, observe, investigate, adjust, and record. Try it on a different small task. Improve the procedure from that experience.
 
 ## Run a small teaching session
 
