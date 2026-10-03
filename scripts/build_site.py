@@ -43,13 +43,6 @@ def shell(title, content, active=''):
     page_class = ' class="full-progression"' if is_progression else ''
     if active in [url for url, _ in SEQUENCE[:-1]] or active == 'workbook.html':
         active = 'workshop.html'
-    diagram_script = ''
-    if 'class="mermaid"' in content:
-        diagram_script = '''<script type="module">
-import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-mermaid.initialize({startOnLoad:true,securityLevel:'strict',theme:THEME,flowchart:{useMaxWidth:true,htmlLabels:false}});
-</script>'''
-        diagram_script = diagram_script.replace('THEME', "'dark'" if is_progression else "'neutral'")
     nav = [('index.html', 'Home'), ('workshop.html', 'Workshop'), ('labs.html', 'More labs'), ('progression.html', 'Learning map'), ('instructors.html', 'For instructors')]
     links = ''.join(f'<a href="{url}"' + (' aria-current="page"' if url == active else '') + f'>{label}</a>' for url, label in nav)
     return f'''<!doctype html>
@@ -57,7 +50,7 @@ mermaid.initialize({startOnLoad:true,securityLevel:'strict',theme:THEME,flowchar
 <title>{html.escape(title)} | AI Learning Lab</title><meta name="description" content="Student workshops and hands-on labs for learning to work with AI. Start at ASK and practice Define, Direct, Check, Adjust.">
 <link rel="stylesheet" href="assets/site.css">{page_style}<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"></head>
 <body{page_class}><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="index.html"><span class="mark" aria-hidden="true">AI</span>Learning Lab</a><nav aria-label="Main navigation">{links}</nav></header>
-<main id="main">{content}</main><footer><strong>AI Learning Lab</strong><span>Start where you are. Move one step.</span><a href="https://github.com/luminerdy/AILearningLab">View on GitHub</a></footer>{diagram_script}</body></html>'''
+<main id="main">{content}</main><footer><strong>AI Learning Lab</strong><span>Start where you are. Move one step.</span><a href="https://github.com/luminerdy/AILearningLab">View on GitHub</a></footer></body></html>'''
 
 def rewrite_links(body):
     for source, (target, _, _) in PAGES.items():
@@ -67,7 +60,6 @@ def rewrite_links(body):
 def write_lesson(text, target, title, label, download_source):
     md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc'])
     body = rewrite_links(md.convert(text))
-    body = re.sub(r'<pre><code class="language-mermaid">(.*?)</code></pre>', r'<div class="diagram"><pre class="mermaid">\1</pre></div>', body, flags=re.S)
     body = re.sub(r'<table>(.*?)</table>', r'<div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>\1</table></div>', body, flags=re.S)
     download = f'<a class="text-link" href="downloads/{download_source}" download>Download editable Markdown</a>'
     sequence, pagination = lesson_navigation(target)
@@ -146,16 +138,23 @@ def progression_layout(body, download):
                     card.append(child)
             if len(cards):
                 section.append(cards)
-        # Keep detailed diagrams available without interrupting the narrative.
         if section_id == 'you-dont-have-to-start-at-the-beginning':
+            children = list(section)
+            route = ET.Element('div', {'class': 'entry-route'})
+            for child in children[3:]:
+                section.remove(child)
+                route.append(child)
+            section.append(route)
+        if section_id == 'the-human-loop-never-goes-away':
             for child in list(section):
-                if child.get('class') == 'diagram':
+                if child.tag == 'p' and ''.join(child.itertext()).startswith('DEFINE →'):
                     index = list(section).index(child)
                     section.remove(child)
-                    detail = ET.Element('details', {'class': 'diagram-detail'})
-                    ET.SubElement(detail, 'summary').text = 'View the progression diagram'
-                    detail.append(child)
-                    section.insert(index, detail)
+                    loop = ET.Element('div', {'class': 'human-loop', 'aria-label': 'Define, Direct, Check, Adjust, repeat'})
+                    for name in ('DEFINE', 'DIRECT', 'CHECK', 'ADJUST'):
+                        ET.SubElement(loop, 'span', {'class': 'loop-pill'}).text = name
+                        ET.SubElement(loop, 'span', {'class': 'loop-arrow', 'aria-hidden': 'true'}).text = '↻' if name == 'ADJUST' else '→'
+                    section.insert(index, loop)
     output = ET.Element('article', {'class': 'progression-article'})
     output.append(hero)
     output.append(nav)

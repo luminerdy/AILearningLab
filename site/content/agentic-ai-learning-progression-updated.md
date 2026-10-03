@@ -19,27 +19,6 @@ ASSIST and SUGGEST describe earlier tool experiences, not prerequisites.
 
 Start with the practice that fits your task. Move among these practices as you learn; the progression is not a prerequisite chain.
 
-```mermaid
-flowchart TD
-    accTitle: Human AI learning progression with an ASK entry point
-    accDescr: ASSIST and SUGGEST are historical developer experiences. New learners can enter at ASK. Later practices are options to explore rather than required stages.
-    subgraph history[Historical developer experiences]
-        assist["ASSIST: software assistance"] --> suggest["SUGGEST: judge suggestions"]
-    end
-    suggest -.-> ask["ASK: describe intent"]
-    entry["New AI users: start here"] --> ask
-    ask -.-> collaborate["COLLABORATE: iterate with AI"]
-    collaborate -.-> orient["ORIENT: provide context and instructions"]
-    orient -.-> teach["TEACH: capture reusable know-how"]
-    teach -.-> enable["ENABLE: connect useful tools"]
-    enable -.-> delegate["DELEGATE: give bounded goals"]
-    delegate -.-> orchestrate["ORCHESTRATE: design human and AI workflows"]
-    classDef entryPoint fill:#dceff0,stroke:#007b70,stroke-width:3px,color:#102c40
-    class ask,entry entryPoint
-```
-
-The dotted connections show practices you can explore. Move among them as needed; they are not prerequisites or a maturity ranking.
-
 ## The progression
 
 This is a learning progression for the human, not simply a list of AI technologies. It describes practices you can grow into and return to—not prerequisites you must complete in order.
@@ -104,16 +83,6 @@ Define → Direct → Check → Adjust is the universal loop. Evaluation is not 
 
 **DEFINE → DIRECT → CHECK → ADJUST → Repeat**
 
-```mermaid
-flowchart LR
-    accTitle: The human learning loop
-    accDescr: Define the goal, direct AI, check the result, and adjust. Return to defining as learning changes the goal.
-    define["DEFINE: goal and criteria"] --> direct["DIRECT: request and context"]
-    direct --> check["CHECK: inspect evidence"]
-    check --> adjust["ADJUST: improve the next attempt"]
-    adjust --> define
-```
-
 What changes is the amount and complexity of work that happens between **Direct** and **Check**—and the strength of the evidence needed to trust the result.
 
 ## Checking grows with you
@@ -123,15 +92,6 @@ CHECK is not synonymous with “review the code.” You can start by observing w
 > “What would convince me this is right?”
 
 You don’t have to understand every line of code to begin checking. Start with behavior you can observe. As capability and stakes increase, **the strength of the evidence should increase too.**
-
-```mermaid
-flowchart TD
-    accTitle: Checking becomes stronger as the work requires more evidence
-    accDescr: Observable behavior, inspection, systematic evidence, and engineering checks build on one another. Choose checks suited to the task and its consequences.
-    behavior["Black-box: observe behavior"] --> inspection["Gray-box: inspect important pieces"]
-    inspection --> evidence["Evidence-based: test against criteria"]
-    evidence --> engineering["Engineering: establish dependable use"]
-```
 
 Each layer includes the earlier checks. Choose the evidence your task requires; every exercise does not need production-level engineering checks.
 
