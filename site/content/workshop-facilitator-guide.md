@@ -1,146 +1,101 @@
-# AI Learning Lab ASK Workshop Facilitator Guide
+# AI Learning Lab: Instructor Guide
 
-This first workshop teaches students to use AI for a small, useful task and judge the result. Students leave with an initial request, a checked result, a revision, and evidence explaining what improved. The central habit is **Define → Direct → Check → Adjust**.
+Students use AI to learn something unfamiliar, build a small working project, and create a DIY or STEM outreach lab that helps someone else learn. Raspberry Pi 500 workstations with Codex CLI are the workshop environment. USB cameras, Raspberry Pi Pico, and PicoBot are optional instructor-prepared routes.
 
-The live introduction is three hours for high school beginners, adaptable to older learners. It can be split into three one-hour classes and expanded into several days using the [follow-on labs](learning-path.md). No coding experience is required. Use the [student workbook](workshop-student-workbook.md) during the session. The website provides continued learning beyond the live workshop.
+This is a first-pass curriculum for piloting. Plan initially for **three two-hour sessions**; these are estimates, not measured completion times. Hardware projects may need additional sessions. A three-hour introduction can cover the warmup, a small first build, and initial checks; it should not promise the complete project and teaching lab.
 
 ## Learning outcomes
 
-By the end, students should be able to:
+- I can use AI to make progress on something unfamiliar, ask useful questions, check its guidance, and decide what to try next.
+- I can use AI to create and test a DIY or STEM outreach lab for another learner.
 
-- Describe a task, its audience, relevant information, and constraints.
-- Ask AI for a useful result and revise the request after inspecting the answer.
-- Check a result against at least three criteria using supplied facts or observable evidence.
-- Explain one limitation and choose a useful next practice.
-- Explain that text is generated token by token and that fluent answers can contain false or unsupported details.
+Look for prediction, observation, explanation, revision, and evidence of increasingly independent choices. A polished project alone is insufficient. Students need not write every line themselves or understand every implementation detail, but should explain important behavior and know how to investigate uncertainty.
 
-ASK is the entry point. Iteration introduces COLLABORATE naturally. Show the full progression only briefly at the end; students do not need to reach its final stage.
+## Prepare the classroom
 
-## Preparation
+Before enrollment, confirm account eligibility, school requirements, sign-in arrangements, and expected usage limits. Do not assume the previously discussed subscription arrangement is settled. Test the full Codex CLI installation and authentication on the actual Pi 500 operating-system image and classroom network. Follow [official Codex CLI documentation](https://learn.chatgpt.com/docs/codex/cli).
 
-Provide a school-approved AI tool, the student workbook, a timer, and a shared display. Follow the school's existing access and academic-use rules. Use the fictional scenario below so participation requires no personal information or uploads. Test the scenario in the chosen tool before class; save one response for a demonstration if access fails. AI responses will vary, so the answer key checks requirements rather than exact wording.
+Prepare one project folder per student, a working Python environment, an editor, Git, and tested run commands. Rehearse opening a terminal, starting `codex`, inspecting files, saving a checkpoint, and restoring a working version. Prepare a known working sample and saved AI responses for access interruptions. AI access is needed for the full intended experience; an offline fallback can practice checking but does not replace it.
 
-Tell students which AI tool and account they need before the workshop. Confirm student account eligibility and school requirements when preparing enrollment instructions. The opening exercises use ordinary text requests and supplied facts.
+Use an instructor-prepared project instruction file to state the exact environment, allowed changes, and learning habits. Ask for small steps and explanations; require confirmation before hardware actions or system changes. Show students how permissions affect edits and commands rather than asking them to approve unfamiliar commands blindly. Use sample data and keep credentials outside shared projects.
 
-Each student completes every lab individually, including directing AI, checking, and revising. Encourage open conversation, questions, and comparing approaches around the room. Students keep their own requests, artifacts, and evidence. There are no assigned partners or role switches; feedback from others is optional. If only the instructor has access, students write individual requests on paper, select several to run on the shared screen, and independently check the displayed output. If no AI is available, use a saved response to practice checking and write the next request students would send.
+Pilot one Pi-only project and one optional Pico project. Verify camera models, Pico firmware, pin assignments, wiring, libraries, and robot hardware against the actual kit and manufacturer documentation. Do not let generated instructions substitute for checked wiring. Review wiring before power; test motor actions in a cleared area with a reliable stop method. Begin with controlled movement before adding sensing.
 
-## Session agenda
+Provide the [student workbook](workshop-student-workbook.md), shared display, materials inventory, and submission location. No coding experience is required; teach the few terminal and file actions students need at the moment they use them.
 
-Open the [workshop overview](https://luminerdy.github.io/AILearningLab/workshop.html) as the shared teaching entry point. Students can follow the Previous and Next links without leaving the website.
+## Participation and project scope
 
-| Workshop page | Teaching focus | Agenda minutes |
+Students complete every lab individually, with open conversation and help around the room. Peer trials are optional. Each student keeps their own learning record. Choose an unfamiliar task with observable outcomes and a small first version. Help students reduce scope before building; offer a Pi-only route to everyone, including students waiting for hardware.
+
+Use [Code & Create Lab](https://github.com/stemoutreach/CodeCreateLab) as inspiration for guides, small builds, checklists, and extensions. Its README describes Python, Pico breadboarding, and PicoBot routes. Include attribution when reusing materials. The example ideas in this workshop are not complete tested hardware labs.
+
+## Teaching sequence and proposed timing
+
+Open the [workshop overview](https://luminerdy.github.io/AILearningLab/workshop.html). Students follow the website's Previous and Next links.
+
+| Session | Minutes | Activity and evidence |
 |---|---|---|
-| [LLM Basics](https://luminerdy.github.io/AILearningLab/llm-basics.html) | Terminology, prediction, context, and hallucinations | 10–25 |
-| [Lab 1 Ask](https://luminerdy.github.io/AILearningLab/lab-1-ask.html) | Demonstrate, define a goal, and make a first request | 25–60 |
-| [Lab 2 Check and Adjust](https://luminerdy.github.io/AILearningLab/lab-2-check-adjust.html) | Inspect evidence, revise, and recheck | 70–95 |
-| [Lab 3 Your Challenge](https://luminerdy.github.io/AILearningLab/lab-3-challenge.html) | Apply the loop, review, and reflect | 95–125 and 135–170 |
-| [Keep Learning](https://luminerdy.github.io/AILearningLab/labs.html) | Choose a follow-on lab | 170–180 |
+| 1: Ask and Explore | 0–15 | Welcome, starting point, workstation and access check |
+| | 15–30 | [LLM basics](llm-basics.md): tokens, context, hallucinations, unsupported-detail activity |
+| | 30–40 | Announcement warmup: compare AI output with supplied facts |
+| | 40–55 | Demonstrate a small build, prediction, check, and focused change |
+| | 55–65 | Break |
+| | 65–85 | Choose unfamiliar project; write three observable criteria |
+| | 85–110 | Discuss plan with AI; build and try first version |
+| | 110–120 | Save work, observations, checkpoint, and next question |
+| 2: Build, Check and Adjust | 0–10 | Reopen work and run saved version |
+| | 10–40 | Check normal use, unusual conditions, and repetition |
+| | 40–55 | Investigate one finding; make and recheck a focused change |
+| | 55–65 | Break |
+| | 65–100 | Independent small extension using AI and available help |
+| | 100–120 | Demonstrate behavior, record limits, and save working version |
+| 3: Create a Lab and Teach | 0–15 | Choose audience and learning goal |
+| | 15–45 | Draft lab from actual code, checks, and equipment |
+| | 45–55 | Review instructions, explanation questions, and assumptions |
+| | 55–65 | Break |
+| | 65–95 | Self-trial or optional learner trial; record confusion and results |
+| | 95–110 | Revise and recheck lab instructions |
+| | 110–120 | Demonstrate, reflect, and choose next learning step |
 
-| Minutes | Activity | Evidence of learning |
-|---|---|---|
-| 0–10 | Welcome, access check, ASK, and starting self-assessment | One task the student wants help with |
-| 10–25 | LLM basics and unsupported-detail activity | Students explain tokens and identify unsupported claims |
-| 25–40 | Demonstrate the learning loop | Class identifies a failure and a revision |
-| 40–60 | Students individually create and check a club announcement | Three checks with expected and actual results |
-| 60–70 | Break | |
-| 70–95 | Revise and recheck the first lab | Saved before and after results |
-| 95–125 | Students complete an independent challenge | A useful artifact and documented evidence |
-| 125–135 | Break | |
-| 135–155 | Review results, discuss findings, and revise | An evidence-based finding and a response |
-| 155–170 | Share evidence and complete the exit ticket | Evidence of a full loop |
-| 170–180 | Introduce the continued learning path and self-location | A selected follow-on lab |
+For a three-hour taster: welcome/access 15 minutes, LLM basics 15, warmup 10, demonstration 15, project definition 20, first build 35, break 10, checks/revision 35, reflection/save 25. Schedule the lab-writing and trial session afterward. Simplify the first build if access or hardware troubleshooting consumes time.
 
-For three one-hour classes, use class one for the opening, demonstration, and first individual response; class two for revision and the independent challenge; class three for individual review, room discussion, reflection, and the next lab. Use the break time in this version for recaps and saving work between classes.
+## Lab 1: Ask and Explore
 
-## Opening script
+Begin: “Choose something you want to learn but do not yet know how to do. AI can help you build it. You will decide what should happen, check what happens, and turn your learning into an activity for someone else.”
 
-“Today you will use AI to help with a task. Your job is to decide what you want, give useful direction, and check what comes back. A polished answer can still miss a requirement. Keep asking: What would convince me this is right?”
+Keep the announcement warmup short. Verify all seven supplied fact groups and the 100-word limit; do not depend on AI producing an error. If it is accurate, improve clarity and recheck.
 
-Ask students to complete the starting self-assessment in their workbook. Explain that it describes current experience, not a score or ranking.
+Demonstrate a tiny quiz or two-choice story in a prepared project folder. Describe the goal, ask AI to clarify and plan, then authorize a small version. Predict an outcome before running. Try a known answer and an invalid input. Ask for an explanation and one focused improvement. Show a checkpoint and the changed files.
 
-## Introduce LLM basics
+Prompt students: “What don't you know yet?” “What is the smallest version?” “How could you tell if it worked?” Keep AI explanations short enough to use. Students should save questions that changed their understanding, not only successful prompts.
 
-Use [LLM basics](llm-basics.md) for the 15-minute introduction. Spend about four minutes on LLMs and tokens, three on the sentence-completion analogy and context, five on hallucinations and the deliberately written practice response, and three on terminology and an individual explanation.
+## Lab 2: Build, Check and Adjust
 
-Emphasize “next token” rather than always “next word.” Describe prediction as the text-generation mechanism without treating it as a complete account of everything a modern AI system can do. Keep model architecture, training mathematics, and token accounting outside this introductory session.
+Ask students to write expected outcomes before running checks. Require evidence from the actual program or device. For a quiz, try known correct and incorrect answers and restart; for a capture tool, inspect the saved file. Help students translate “it doesn't work” into steps, expected behavior, actual behavior, and exact errors.
 
-Use the fixed practice response so the activity works even when a live AI answer contains no errors. Distinguish false statements from details unsupported by the supplied facts. Connect both to checking. Asking the model to be accurate or to avoid guessing does not replace evidence.
+Encourage one investigative check before a broad rewrite. Compare automated tests with the student's criteria. Make an extension small enough that students can predict and observe its effect. Independence includes seeking useful help; do not withdraw support to prove independence.
 
-## Shared scenario
+## Lab 3: Create a Lab and Teach
 
-These are fictional planning facts for a school club event:
+Students give AI actual project files and evidence, then draft for a named audience. Require learning questions and expected observations, not just commands to copy. Review setup, file names, dependencies, hardware details, and claims of testing.
 
-- Event: Code and Create Club introductory meeting.
-- Day and time: Thursday, 3:30–4:15 p.m.
-- Location: Room 204.
-- Audience: students curious about making things with technology.
-- Beginners are welcome; no coding experience is needed.
-- Materials are provided; students do not need to bring a device.
-- Capacity is 20 students.
-- Sign up with the club adviser by Wednesday.
-- There is no fee.
+A self-trial is required; another learner's trial is encouraged when feasible. Students must label which occurred. Watch for missing steps and whether the learner can explain the target idea. Recheck instructions after revisions. A STEM outreach version should fit the audience's time, vocabulary, supervision, and available equipment.
 
-The announcement must include the event name, day, start and end times, location, beginner welcome, materials information, capacity, signup deadline and method, and no-fee information. It must be at most 100 words and invent no additional facts.
+## Evidence and assessment
 
-## Demonstrate the loop
+| Outcome | Evidence |
+|---|---|
+| Define | An unfamiliar learning goal, small version, equipment context, and three criteria |
+| Direct | Questions, reviewed plan, and requests suited to the next step |
+| Check | Expected and actual results from observable behavior or other independent evidence |
+| Adjust | A finding-linked change and repeated checks |
+| Learn independently | A chosen extension, useful help-seeking, prediction, and explanation |
+| Teach | Audience-specific lab, trial record, and improvement based on the trial |
 
-Start with “Write an announcement for a school technology club meeting.” Before sending it, ask what information is missing. Inspect the answer together. Missing details or invented facts are useful findings; do not depend on the model making a specific mistake.
+Final submission: working project and run instructions; reusable lab; project checks; lab trial and revision; reflection and credits. If unfinished, accept an honest account of demonstrated behavior and remaining work, and arrange a continuation rather than claiming completion.
 
-Then define the goal: “A student should know whether this event is for them and how to attend.” Read the supplied facts and acceptance criteria. Send this second request:
+## Pilot and improve
 
-> Write a friendly announcement for students curious about making things with technology. Use only the event facts below. Include every required detail, stay within 100 words, and do not invent a link, date, activity, or contact name. If a necessary detail is missing, ask me. Event facts: [paste the shared scenario facts].
+Record setup delays, scope reductions, questions that helped learning, checks students could perform independently, trial confusion, and time needed per route. Ask students what they now feel able to investigate. Revise the estimates and materials from that evidence before expanding hardware choices.
 
-Check the result directly against the scenario. Count the words using an editor or manual count; asking AI for a word count alone does not establish it. If it fails a criterion, identify the actual failure and ask for a targeted revision. Check the revision again.
-
-Explain that providing useful context is part of making a good request. Students do not need to learn AGENTS.md or tools to do this exercise.
-
-## Guide individual practice
-
-Students create their own request from the scenario, save the response, and record at least three checks. Everyone checks factual fidelity, completeness, and word count. Students identify the signup method and deadline in their announcement. They may ask a classmate to read it for additional feedback.
-
-Ask: “Which sentence supports that finding?” “What did you compare it with?” “What would you change in your request?” When a result already meets the criteria, students can improve clarity or explore a different tone while keeping the facts intact. Recheck after every revision.
-
-At minute 70, students resume their own lab and revise from their findings. Avoid treating longer prompts as automatically better; assess whether the direction and evidence are useful.
-
-## Independent challenge
-
-Students choose one task using the same supplied facts:
-
-1. **Event FAQ:** Create five questions and answers covering audience, timing and location, materials, signup and capacity, and cost. Check every answer against the facts and verify that no unsupported details were added.
-2. **Preparation checklist:** Create a checklist for a student deciding whether and how to attend. Distinguish stated facts from suggested actions. Check that signup by Wednesday and the Thursday meeting appear, and that bringing a device is not described as required.
-3. **Announcement for a new reader:** Create an announcement for someone unfamiliar with the club, at most 80 words. Include the same required details. Check the facts, count words, and identify the signup instructions themselves, optionally asking a classmate for feedback.
-
-Each student defines three criteria before sending a request, saves a response, records checks, and makes at least one evidence-driven revision. They may revise the request or the artifact, but must explain which they changed and recheck the final result. If criteria were already met, the revision can improve clarity based on a reader's feedback.
-
-## Review and assessment
-
-Students review their own goal, criteria, and final artifact, recording one finding with specific evidence. Encourage open discussion and optional feedback from classmates or the instructor. Each student makes a change or explains why the evidence supports keeping the result, and records where the finding came from.
-
-Use this evidence checklist to identify support needs. It evaluates the task, not the student's place on the progression.
-
-| Outcome | Evidence to look for | If evidence is missing |
-|---|---|---|
-| Define | A goal and three checkable criteria written before requesting | Help replace “good” with a concrete condition |
-| Direct | A request containing relevant facts and constraints | Ask which missing information the AI would need |
-| Check | Expected and actual results tied to facts or observation | Ask the student to demonstrate one check |
-| Adjust | A revision linked to a finding and a second check | Compare versions and identify what changed |
-| Reflect | A limitation and a useful next step | Ask what still needs evidence |
-
-A polished final artifact alone does not demonstrate all four habits. Use the saved process and exit ticket to decide what to revisit.
-
-## Closing and self-location
-
-Show **ASSIST → SUGGEST → ASK → COLLABORATE → ORIENT → TEACH → ENABLE → DELEGATE → ORCHESTRATE**. Explain that ASSIST and SUGGEST describe historical developer experiences. Learners can enter at ASK and move among practices according to their needs.
-
-Students mark ASK and COLLABORATE as comfortable, experimented, or a desired next practice. They can name another practice they want to explore, but there is no requirement to progress toward ORCHESTRATE.
-
-Explain how checking can grow: observe behavior; inspect important pieces; collect systematic evidence; use engineering checks when dependable systems require them. This workshop practices checking against supplied facts and criteria. AI's explanation of its own answer is not independent proof.
-
-## Improve the next session
-
-After the pilot, record where students got stuck, which checks they could perform independently, how AI access affected participation, and whether the timing worked. Collect one specific improvement suggestion from students. Use that evidence to revise the workshop before adding more stages.
-
-## Learning framework
-
-Use the [human learning progression](agentic-ai-learning-progression-updated.md) to explore the inclusive ASK entry point, self-location approach, checking model, and iterative learning philosophy. The workshop applies these ideas through a fictional event, individual practice, and evidence-based reflection.
-
+Use the [learning map](https://luminerdy.github.io/AILearningLab/progression.html) for reflection. ASK is an entry point; learners move among practices rather than earning a maturity score. See the [full framework](agentic-ai-learning-progression-updated.md) and [continued learning](learning-path.md).
