@@ -4,6 +4,7 @@ import html
 import re
 import shutil
 import sys
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / '.site-tools'))
@@ -36,21 +37,25 @@ def lesson_navigation(target):
     return f'<nav class="lesson-sequence" aria-label="Workshop sequence"><h2>Workshop</h2><ol>{items}</ol></nav>', f'<nav class="lesson-pagination" aria-label="Lesson navigation"><a href="{before[0]}">Previous: {html.escape(before[1])}</a><a href="{after[0]}">Next: {html.escape(after[1])}</a></nav>'
 
 def shell(title, content, active=''):
+    is_progression = active == 'full-progression.html'
+    page_style = '<link rel="stylesheet" href="assets/progression.css">' if is_progression else ''
+    page_class = ' class="full-progression"' if is_progression else ''
     if active in [url for url, _ in SEQUENCE[:-1]] or active == 'workbook.html':
         active = 'workshop.html'
     diagram_script = ''
     if 'class="mermaid"' in content:
         diagram_script = '''<script type="module">
 import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-mermaid.initialize({startOnLoad:true,securityLevel:'strict',theme:'neutral',flowchart:{useMaxWidth:true,htmlLabels:false}});
+mermaid.initialize({startOnLoad:true,securityLevel:'strict',theme:THEME,flowchart:{useMaxWidth:true,htmlLabels:false}});
 </script>'''
+        diagram_script = diagram_script.replace('THEME', "'dark'" if is_progression else "'neutral'")
     nav = [('index.html', 'Home'), ('workshop.html', 'Workshop'), ('labs.html', 'More labs'), ('progression.html', 'Learning map'), ('instructors.html', 'For instructors')]
     links = ''.join(f'<a href="{url}"' + (' aria-current="page"' if url == active else '') + f'>{label}</a>' for url, label in nav)
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(title)} | AI Learning Lab</title><meta name="description" content="Student workshops and hands-on labs for learning to work with AI. Start at ASK and practice Define, Direct, Check, Adjust.">
-<link rel="stylesheet" href="assets/site.css"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"></head>
-<body><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="index.html"><span class="mark" aria-hidden="true">AI</span>Learning Lab</a><nav aria-label="Main navigation">{links}</nav></header>
+<link rel="stylesheet" href="assets/site.css">{page_style}<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"></head>
+<body{page_class}><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="index.html"><span class="mark" aria-hidden="true">AI</span>Learning Lab</a><nav aria-label="Main navigation">{links}</nav></header>
 <main id="main">{content}</main><footer><strong>AI Learning Lab</strong><span>Start where you are. Move one step.</span><a href="https://github.com/luminerdy/AILearningLab">View on GitHub</a></footer>{diagram_script}</body></html>'''
 
 def rewrite_links(body):
@@ -66,7 +71,96 @@ def write_lesson(text, target, title, label, download_source):
     download = f'<a class="text-link" href="downloads/{download_source}" download>Download editable Markdown</a>'
     sequence, pagination = lesson_navigation(target)
     content = f'<div class="page-intro"><p class="eyebrow">{label}</p>{download}</div><div class="reading-layout"><aside class="contents">{sequence}<h2>On this page</h2>{md.toc}</aside><article class="prose">{body}{pagination}</article></div>'
+    if target == 'full-progression.html':
+        content = progression_layout(body, download)
     (OUT / target).write_text(shell(title, content, target), encoding='utf-8')
+
+def progression_layout(body, download):
+    """Present the Markdown content in the reference artifact's card layout."""
+    tree = ET.fromstring('<div>' + body + '</div>')
+    hero = ET.Element('div', {'class': 'progression-hero'})
+    eyebrow = ET.SubElement(hero, 'p', {'class': 'eyebrow'})
+    eyebrow.text = 'HUMAN LEARNING PROGRESSION'
+    sections = []
+    current = hero
+    for node in list(tree):
+        if node.tag == 'h2':
+            current = ET.Element('section', {'class': 'progression-section', 'aria-labelledby': node.get('id', '')})
+            sections.append(current)
+        current.append(node)
+    nav = ET.Element('nav', {'class': 'section-nav', 'aria-label': 'Document sections'})
+    for section in sections:
+        heading = section.find('h2')
+        link = ET.SubElement(nav, 'a', {'href': '#' + heading.get('id', '')})
+        link.text = ''.join(heading.itertext())
+    for section in sections:
+        section_id = section.find('h2').get('id', '')
+        if section_id == 'the-progression':
+            lists = section.findall('ul')
+            for i, listing in enumerate(lists):
+                listing.set('class', 'practice-ladder' if i == 0 else 'self-location-map')
+                for item in listing:
+                    name = ''.join(item.itertext()).strip()
+                    if name.startswith('ASK'):
+                        item.set('class', 'ask-entry')
+                    elif name.startswith(('ASSIST', 'SUGGEST')):
+                        item.set('class', 'historical')
+            # Preserve the Markdown wording while presenting self-location as a line.
+            children = list(section)
+            start = next(i for i, child in enumerate(children) if child.tag == 'h3' and child.get('id') == 'find-yourself-on-the-line')
+            panel = ET.Element('div', {'class': 'self-map', 'aria-labelledby': 'find-yourself-on-the-line'})
+            legend = ET.Element('div', {'class': 'map-key'})
+            reflection = ET.Element('div', {'class': 'assessment-grid'})
+            for child in children[start:]:
+                section.remove(child)
+                text = ''.join(child.itertext()).strip()
+                if child.tag == 'ul':
+                    child.set('class', 'map-line')
+                    panel.append(child)
+                elif child.tag == 'p' and text.startswith(('Comfortable:', 'Experimented:', '★')):
+                    child.set('class', 'key-item')
+                    marker = ET.Element('span', {'class': 'key-dot' if text.startswith('Comfortable:') else 'key-ring' if text.startswith('Experimented:') else 'key-star', 'aria-hidden': 'true'})
+                    if text.startswith('★'):
+                        marker.text = '★'
+                        child.text = (child.text or '').replace('★', '').strip()
+                    child.insert(0, marker)
+                    legend.append(child)
+                elif child.tag == 'p' and text.startswith(('Where am I', 'What have I', 'What would help')):
+                    reflection.append(child)
+                else:
+                    panel.append(child)
+            panel.append(legend)
+            panel.append(reflection)
+            section.append(panel)
+        # Group each h3 and its following content as a card, without duplicating prose.
+        if section_id in ('checking-grows-with-you', 'define-does-not-mean-write-the-complete-spec', 'this-is-familiar-agile-was-solving-the-same-uncertainty', 'what-actually-changes'):
+            children = list(section)
+            cards = ET.Element('div', {'class': 'concept-cards checks' if section_id == 'checking-grows-with-you' else 'concept-cards'})
+            card = None
+            for child in children:
+                if child.tag == 'h3':
+                    card = ET.SubElement(cards, 'div', {'class': 'concept-card'})
+                if card is not None:
+                    section.remove(child)
+                    card.append(child)
+            if len(cards):
+                section.append(cards)
+        # Keep detailed diagrams available without interrupting the narrative.
+        if section_id == 'you-dont-have-to-start-at-the-beginning':
+            for child in list(section):
+                if child.get('class') == 'diagram':
+                    index = list(section).index(child)
+                    section.remove(child)
+                    detail = ET.Element('details', {'class': 'diagram-detail'})
+                    ET.SubElement(detail, 'summary').text = 'View the progression diagram'
+                    detail.append(child)
+                    section.insert(index, detail)
+    output = ET.Element('article', {'class': 'progression-article'})
+    output.append(hero)
+    output.append(nav)
+    for section in sections:
+        output.append(section)
+    return '<div class="progression-download">' + download + '</div>' + ET.tostring(output, encoding='unicode', method='html')
 
 for source, (target, title, label) in PAGES.items():
     write_lesson((ROOT / source).read_text(encoding='utf-8'), target, title, label, source)
