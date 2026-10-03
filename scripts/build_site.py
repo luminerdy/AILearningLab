@@ -12,6 +12,7 @@ import markdown
 OUT = ROOT / 'docs'
 OUT.mkdir(exist_ok=True)
 PAGES = {
+    'agentic-ai-learning-progression-updated.md': ('full-progression.html', 'Human learning progression', 'THE FULL LEARNING FRAMEWORK'),
     'workshop-student-workbook.md': ('workshop.html', 'Student workshop', 'START AT ASK'),
     'learning-path.md': ('labs.html', 'Keep learning', 'AFTER THE WORKSHOP'),
     'workshop-facilitator-guide.md': ('instructors.html', 'Instructor guide', 'TEACH THE WORKSHOP'),
@@ -28,7 +29,6 @@ def shell(title, content, active=''):
 <main id="main">{content}</main><footer><strong>AI Learning Lab</strong><span>Start where you are. Move one step.</span><a href="https://github.com/luminerdy/AILearningLab">View on GitHub</a></footer></body></html>'''
 
 def rewrite_links(body):
-    body = body.replace('href="agentic-ai-learning-progression-updated.html"', 'href="full-progression.html"')
     for source, (target, _, _) in PAGES.items():
         body = body.replace(f'href="{source}"', f'href="{target}"')
     return body
@@ -52,7 +52,6 @@ stages = [('ASK', 'I describe intent.'), ('COLLABORATE', 'I iterate with AI.'), 
 stage_html = ''.join(f'<li><span class="card-number">{i:02}</span><h3>{name}</h3><p>{desc}</p></li>' for i, (name, desc) in enumerate(stages, 1))
 progression = f'''<section class="map-intro"><p class="eyebrow">HUMAN LEARNING PROGRESSION</p><h1>Start where you are.<br>Move one step.</h1><p class="lead">This is a learning map, not a maturity score. Choose the practice that helps with the work in front of you.</p></section><ol class="stage-grid">{stage_html}</ol><section class="prose"><h2>Find yourself on the map</h2><p>For each practice, ask: Can I use this intentionally and repeatedly? Have I experimented with it? Would learning it help me next?</p><p>You can start directly at ASK. ASSIST and SUGGEST describe earlier developer tools; they are not prerequisites. You do not need to reach ORCHESTRATE.</p><h2>Strengthen how you check</h2><ol><li><strong>Black-box behavior:</strong> Does the result do what I wanted?</li><li><strong>Gray-box inspection:</strong> Can I inspect the important pieces?</li><li><strong>Evidence-based checking:</strong> Can I test against criteria and known results?</li><li><strong>Engineering checking:</strong> Is it fit for dependable use?</li></ol><p>The checks build on each other. Choose evidence that fits the task and strengthen it as consequences increase.</p><h2>Learn before you specify everything</h2><p>Define enough to take a useful next step. Explore, try, observe, and adjust. A more precise specification can be an output of learning.</p><a class="button secondary" href="full-progression.html">Read the full progression document</a></section>'''
 (OUT / 'progression.html').write_text(shell('Learning map', progression, 'progression.html'), encoding='utf-8')
-shutil.copy2(ROOT / 'agentic-ai-learning-progression-updated.html', OUT / 'full-progression.html')
 (OUT / 'downloads').mkdir(exist_ok=True)
 for source in PAGES:
     shutil.copy2(ROOT / source, OUT / 'downloads' / source)

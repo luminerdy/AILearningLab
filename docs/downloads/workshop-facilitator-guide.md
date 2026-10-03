@@ -122,4 +122,4 @@ After the pilot, record where students got stuck, which checks they could perfor
 
 ## Learning framework
 
-Use the [human learning progression](agentic-ai-learning-progression-updated.html) to explore the inclusive ASK entry point, self-location approach, checking model, and iterative learning philosophy. The workshop applies these ideas through a fictional event, paired practice, and evidence-based reflection.
+Use the [human learning progression](agentic-ai-learning-progression-updated.md) to explore the inclusive ASK entry point, self-location approach, checking model, and iterative learning philosophy. The workshop applies these ideas through a fictional event, paired practice, and evidence-based reflection.

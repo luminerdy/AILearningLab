@@ -22,6 +22,6 @@ For each exercise, save a goal, request, result, checks, revision, and reflectio
 
 ## Explore the learning framework
 
-- [Human learning progression](agentic-ai-learning-progression-updated.html) explains the framework, checking progression, and self-location map. Download and open the HTML in a browser to view its designed layout.
+- [Human learning progression](agentic-ai-learning-progression-updated.md) explains the framework, checking progression, and self-location map.
 
 Keep asking **“What would convince me this is right?”** Use what you learn from each result to choose your next useful step.
