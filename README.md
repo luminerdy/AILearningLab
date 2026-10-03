@@ -4,6 +4,8 @@ Learn to work with AI through practice, evidence, and reflection. Start at **ASK
 
 Visit the [AI Learning Lab website](https://luminerdy.github.io/AILearningLab/) to start learning.
 
+Teach and learn from the [Workshop](https://luminerdy.github.io/AILearningLab/workshop.html): **LLM Basics → Lab 1 Ask → Lab 2 Check and Adjust → Lab 3 Your Challenge → Keep Learning**. Each lesson links to the previous and next step. The Markdown files below provide editable copies of the training materials.
+
 Use these materials for a three-hour introductory workshop, several class sessions, or independent practice afterward. No coding experience is required.
 
 Complete each lab individually. Talk with classmates, compare approaches, and ask for help as you work. Keep your own requests, results, checks, and revisions.

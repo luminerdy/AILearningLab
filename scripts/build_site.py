@@ -14,12 +14,30 @@ OUT.mkdir(exist_ok=True)
 PAGES = {
     'llm-basics.md': ('llm-basics.html', 'LLM basics', 'BEFORE YOU BEGIN'),
     'agentic-ai-learning-progression-updated.md': ('full-progression.html', 'Human learning progression', 'THE FULL LEARNING FRAMEWORK'),
-    'workshop-student-workbook.md': ('workshop.html', 'Student workshop', 'START AT ASK'),
+    'workshop-student-workbook.md': ('workbook.html', 'Complete student workbook', 'WORKSHOP REFERENCE'),
     'learning-path.md': ('labs.html', 'Keep learning', 'AFTER THE WORKSHOP'),
     'workshop-facilitator-guide.md': ('instructors.html', 'Instructor guide', 'TEACH THE WORKSHOP'),
 }
+SEQUENCE = [
+    ('llm-basics.html', 'Introduction — LLM Basics'),
+    ('lab-1-ask.html', 'Lab 1 — Ask'),
+    ('lab-2-check-adjust.html', 'Lab 2 — Check and Adjust'),
+    ('lab-3-challenge.html', 'Lab 3 — Your Challenge'),
+    ('labs.html', 'Keep Learning'),
+]
+
+def lesson_navigation(target):
+    if target not in [url for url, _ in SEQUENCE]:
+        return '', ''
+    i = next(i for i, (url, _) in enumerate(SEQUENCE) if url == target)
+    items = ''.join(f'<li><a href="{url}"' + (' aria-current="page"' if url == target else '') + f'>{html.escape(label)}</a></li>' for url, label in SEQUENCE)
+    before = SEQUENCE[i-1] if i else ('workshop.html', 'Workshop overview')
+    after = SEQUENCE[i+1] if i+1 < len(SEQUENCE) else ('workshop.html', 'Workshop overview')
+    return f'<nav class="lesson-sequence" aria-label="Workshop sequence"><h2>Workshop</h2><ol>{items}</ol></nav>', f'<nav class="lesson-pagination" aria-label="Lesson navigation"><a href="{before[0]}">Previous: {html.escape(before[1])}</a><a href="{after[0]}">Next: {html.escape(after[1])}</a></nav>'
 
 def shell(title, content, active=''):
+    if active in [url for url, _ in SEQUENCE[:-1]] or active == 'workbook.html':
+        active = 'workshop.html'
     diagram_script = ''
     if 'class="mermaid"' in content:
         diagram_script = '''<script type="module">
@@ -40,15 +58,34 @@ def rewrite_links(body):
         body = body.replace(f'href="{source}"', f'href="{target}"')
     return body
 
-for source, (target, title, label) in PAGES.items():
-    text = (ROOT / source).read_text(encoding='utf-8')
+def write_lesson(text, target, title, label, download_source):
     md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc'])
     body = rewrite_links(md.convert(text))
     body = re.sub(r'<pre><code class="language-mermaid">(.*?)</code></pre>', r'<div class="diagram"><pre class="mermaid">\1</pre></div>', body, flags=re.S)
     body = re.sub(r'<table>(.*?)</table>', r'<div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>\1</table></div>', body, flags=re.S)
-    download = f'<a class="text-link" href="downloads/{source}" download>Download editable Markdown</a>'
-    content = f'<div class="page-intro"><p class="eyebrow">{label}</p>{download}</div><div class="reading-layout"><aside class="contents"><h2>On this page</h2>{md.toc}</aside><article class="prose">{body}</article></div>'
+    download = f'<a class="text-link" href="downloads/{download_source}" download>Download editable Markdown</a>'
+    sequence, pagination = lesson_navigation(target)
+    content = f'<div class="page-intro"><p class="eyebrow">{label}</p>{download}</div><div class="reading-layout"><aside class="contents">{sequence}<h2>On this page</h2>{md.toc}</aside><article class="prose">{body}{pagination}</article></div>'
     (OUT / target).write_text(shell(title, content, target), encoding='utf-8')
+
+for source, (target, title, label) in PAGES.items():
+    write_lesson((ROOT / source).read_text(encoding='utf-8'), target, title, label, source)
+
+workbook = (ROOT / 'workshop-student-workbook.md').read_text(encoding='utf-8')
+def portion(start, end=None):
+    return workbook.split(start, 1)[1].split(end, 1)[0] if end else workbook.split(start, 1)[1]
+start = portion('## Your starting point', '## LLM basics warmup')
+facts = portion('## Event facts', '## Your first lab')
+first = portion('## Your first lab', '### Check the response')
+checks = portion('### Check the response', '## Your independent challenge')
+challenge = portion('## Your independent challenge')
+write_lesson('# Lab 1 Ask\n\nDefine your goal and make your first request. Save the response; you will check and improve it in Lab 2. Checking matters from the beginning: read what comes back and note anything unexpected.\n\n## Your starting point\n'+start+'\n## Event facts\n'+facts+'\n## Create your announcement\n'+first, 'lab-1-ask.html', 'Lab 1 — Ask', 'WORKSHOP LAB 1', 'workshop-student-workbook.md')
+write_lesson('# Lab 2 Check and Adjust\n\nContinue with your announcement from Lab 1. Use the event facts as evidence, then revise and recheck.\n\n## Event facts\n'+facts+'\n## Check the response\n'+checks, 'lab-2-check-adjust.html', 'Lab 2 — Check and Adjust', 'WORKSHOP LAB 2', 'workshop-student-workbook.md')
+write_lesson('# Lab 3 Your Challenge\n\nComplete a new task using the full Define → Direct → Check → Adjust loop. Work individually and discuss ideas with classmates as you need.\n\n## Event facts\n'+facts+'\n## Choose your challenge\n'+challenge, 'lab-3-challenge.html', 'Lab 3 — Your Challenge', 'WORKSHOP LAB 3', 'workshop-student-workbook.md')
+
+steps = ''.join(f'<a class="card" href="{url}"><span class="card-number">{i+1:02} / WORKSHOP</span><h2>{html.escape(label)}</h2><span class="card-link">Open lesson</span></a>' for i, (url, label) in enumerate(SEQUENCE))
+overview = f'''<section class="map-intro"><p class="eyebrow">YOUR THREE-HOUR WORKSHOP</p><h1>Learn together.<br>Practice individually.</h1><p class="lead">Start with LLM Basics, then complete three labs. Keep your own prompts, results, checks, and revisions. Talk with classmates and ask for help as you work.</p><a class="button" href="llm-basics.html">Begin with LLM Basics</a></section><section class="route"><h2>Follow the workshop</h2><div class="cards">{steps}</div></section><section class="prose"><h2>Teaching or saving your work?</h2><p>Use the <a href="instructors.html">instructor guide</a> for timing, demonstrations, and teaching notes in this same sequence. The <a href="workbook.html">complete student workbook</a> brings all recording prompts together and includes a Markdown download.</p><p>After the workshop, choose a follow-on lab from Keep Learning. You can return to any lesson when it helps your work.</p></section>'''
+(OUT / 'workshop.html').write_text(shell('Workshop', overview, 'workshop.html'), encoding='utf-8')
 
 home = '''<section class="opening"><div><p class="eyebrow">A PRACTICE SPACE FOR WORKING WITH AI</p><h1>Ask. Try.<br>Check. Improve.</h1><p class="lead">Learn to turn an idea into a useful result—and show why it works. Start with everyday language. No coding experience needed.</p><div class="actions"><a class="button" href="workshop.html">Start the student workshop</a><a class="text-link" href="instructors.html">Teaching a group?</a></div><p class="meta">3-hour introduction · Individual labs and open discussion · More to explore afterward</p></div><div class="loop-panel"><p class="eyebrow">YOUR LEARNING LOOP</p><ol><li><span>01</span><div><strong>Define</strong><p>What do I want to accomplish?</p></div></li><li><span>02</span><div><strong>Direct</strong><p>What does AI need to know?</p></div></li><li><span>03</span><div><strong>Check</strong><p>What would convince me this is right?</p></div></li><li><span>04</span><div><strong>Adjust</strong><p>What should I change and try again?</p></div></li></ol><p class="loop-note">Repeat as you learn.</p></div></section>
 <section class="route"><div class="section-heading"><p class="eyebrow">CHOOSE YOUR NEXT PRACTICE</p><h2>The workshop is your starting point.</h2><p>Make something small, test it against your goal, and build from there.</p></div><div class="cards"><a class="card" href="workshop.html"><span class="card-number">01 / START</span><h3>Learn to ASK</h3><p>Create a club announcement, check the facts, revise it, and document what changed; classmates can offer feedback.</p><span class="card-link">Open the workbook</span></a><a class="card" href="labs.html"><span class="card-number">02 / PRACTICE</span><h3>Keep experimenting</h3><p>Try five follow-on labs: adapt a message, create a study helper, write a project brief, capture a procedure, and build a small project.</p><span class="card-link">Explore the labs</span></a><a class="card" href="progression.html"><span class="card-number">03 / REFLECT</span><h3>Find your next step</h3><p>Notice what you can repeat confidently, what you have tried, and what would help your work next.</p><span class="card-link">View the learning map</span></a></div></section>

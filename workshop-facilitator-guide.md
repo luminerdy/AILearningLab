@@ -26,6 +26,16 @@ Each student completes every lab individually, including directing AI, checking,
 
 ## Session agenda
 
+Open the [workshop overview](https://luminerdy.github.io/AILearningLab/workshop.html) as the shared teaching entry point. Students can follow the Previous and Next links without leaving the website.
+
+| Workshop page | Teaching focus | Agenda minutes |
+|---|---|---|
+| [LLM Basics](https://luminerdy.github.io/AILearningLab/llm-basics.html) | Terminology, prediction, context, and hallucinations | 10–25 |
+| [Lab 1 Ask](https://luminerdy.github.io/AILearningLab/lab-1-ask.html) | Demonstrate, define a goal, and make a first request | 25–60 |
+| [Lab 2 Check and Adjust](https://luminerdy.github.io/AILearningLab/lab-2-check-adjust.html) | Inspect evidence, revise, and recheck | 70–95 |
+| [Lab 3 Your Challenge](https://luminerdy.github.io/AILearningLab/lab-3-challenge.html) | Apply the loop, review, and reflect | 95–125 and 135–170 |
+| [Keep Learning](https://luminerdy.github.io/AILearningLab/labs.html) | Choose a follow-on lab | 170–180 |
+
 | Minutes | Activity | Evidence of learning |
 |---|---|---|
 | 0–10 | Welcome, access check, ASK, and starting self-assessment | One task the student wants help with |
