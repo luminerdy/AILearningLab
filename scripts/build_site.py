@@ -12,6 +12,7 @@ import markdown
 OUT = ROOT / 'docs'
 OUT.mkdir(exist_ok=True)
 PAGES = {
+    'llm-basics.md': ('llm-basics.html', 'LLM basics', 'BEFORE YOU BEGIN'),
     'agentic-ai-learning-progression-updated.md': ('full-progression.html', 'Human learning progression', 'THE FULL LEARNING FRAMEWORK'),
     'workshop-student-workbook.md': ('workshop.html', 'Student workshop', 'START AT ASK'),
     'learning-path.md': ('labs.html', 'Keep learning', 'AFTER THE WORKSHOP'),

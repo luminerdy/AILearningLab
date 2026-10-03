@@ -12,6 +12,7 @@ By the end, students should be able to:
 - Ask AI for a useful result and revise the request after inspecting the answer.
 - Check a result against at least three criteria using supplied facts or observable evidence.
 - Explain one limitation and choose a useful next practice.
+- Explain that text is generated token by token and that fluent answers can contain false or unsupported details.
 
 ASK is the entry point. Iteration introduces COLLABORATE naturally. Show the full progression only briefly at the end; students do not need to reach its final stage.
 
@@ -27,9 +28,10 @@ Pairs work well: one student directs AI while the other checks the result; switc
 
 | Minutes | Activity | Evidence of learning |
 |---|---|---|
-| 0–15 | Welcome, access check, ASK, and starting self-assessment | One task the student wants help with |
-| 15–35 | Demonstrate the learning loop | Class identifies a failure and a revision |
-| 35–60 | Pairs create and check a club announcement | Three checks with expected and actual results |
+| 0–10 | Welcome, access check, ASK, and starting self-assessment | One task the student wants help with |
+| 10–25 | LLM basics and unsupported-detail activity | Students explain tokens and identify unsupported claims |
+| 25–40 | Demonstrate the learning loop | Class identifies a failure and a revision |
+| 40–60 | Pairs create and check a club announcement | Three checks with expected and actual results |
 | 60–70 | Break | |
 | 70–95 | Switch roles, revise, and recheck | Saved before and after results |
 | 95–125 | Students complete an independent challenge | A useful artifact and documented evidence |
@@ -45,6 +47,14 @@ For three one-hour classes, use class one for the opening, demonstration, and in
 “Today you will use AI to help with a task. Your job is to decide what you want, give useful direction, and check what comes back. A polished answer can still miss a requirement. Keep asking: What would convince me this is right?”
 
 Ask students to complete the starting self-assessment in their workbook. Explain that it describes current experience, not a score or ranking.
+
+## Introduce LLM basics
+
+Use [LLM basics](llm-basics.md) for the 15-minute introduction. Spend about four minutes on LLMs and tokens, three on the sentence-completion analogy and context, five on hallucinations and the deliberately written practice response, and three on terminology and a partner explanation.
+
+Emphasize “next token” rather than always “next word.” Describe prediction as the text-generation mechanism without treating it as a complete account of everything a modern AI system can do. Keep model architecture, training mathematics, and token accounting outside this introductory session.
+
+Use the fixed practice response so the activity works even when a live AI answer contains no errors. Distinguish false statements from details unsupported by the supplied facts. Connect both to checking. Asking the model to be accurate or to avoid guessing does not replace evidence.
 
 ## Shared scenario
 

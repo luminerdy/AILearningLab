@@ -8,6 +8,7 @@ Use these materials for a three-hour introductory workshop, several class sessio
 
 ## Start the workshop
 
+- Start with [LLM basics](llm-basics.md) for tokens, prompts, context, and hallucinations.
 - Instructors: use the [facilitator guide](workshop-facilitator-guide.md) for preparation, the three-hour agenda, demonstration, exercises, and assessment.
 - Students: work through the [student workbook](workshop-student-workbook.md), saving your requests, results, checks, and revisions.
 - After the workshop: choose a lab from the [continued learning path](learning-path.md).

@@ -16,6 +16,18 @@ My experience improving an AI answer through conversation: comfortable and repea
 
 These describe your experience today. They are not a ranking.
 
+## LLM basics warmup
+
+Read [LLM basics](llm-basics.md) and complete the unsupported-detail activity with a partner.
+
+In my own words, a token is:
+
+A response can sound convincing and still need checking because:
+
+One supported detail, one contradicted detail, and one unsupported detail from the practice response:
+
+What I would ask AI to change:
+
 ## Event facts
 
 Code and Create Club is holding an introductory meeting Thursday, 3:30–4:15 p.m., in Room 204. It is for students curious about making things with technology. Beginners are welcome and no coding experience is needed. Materials are provided, so students do not need to bring a device. Capacity is 20 students. Sign up with the club adviser by Wednesday. There is no fee.
