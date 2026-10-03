@@ -22,7 +22,7 @@ Provide a school-approved AI tool, the student workbook, a timer, and a shared d
 
 Tell students which AI tool and account they need before the workshop. Confirm student account eligibility and school requirements when preparing enrollment instructions. The opening exercises use ordinary text requests and supplied facts.
 
-Pairs work well: one student directs AI while the other checks the result; switch roles halfway through. If only the instructor has access, pairs write requests on paper, select several to run on the shared screen, and independently check the displayed output. If no AI is available, use a saved response to practice checking and write the next request students would send.
+Each student completes every lab individually, including directing AI, checking, and revising. Encourage open conversation, questions, and comparing approaches around the room. Students keep their own requests, artifacts, and evidence. There are no assigned partners or role switches; feedback from others is optional. If only the instructor has access, students write individual requests on paper, select several to run on the shared screen, and independently check the displayed output. If no AI is available, use a saved response to practice checking and write the next request students would send.
 
 ## Session agenda
 
@@ -31,16 +31,16 @@ Pairs work well: one student directs AI while the other checks the result; switc
 | 0–10 | Welcome, access check, ASK, and starting self-assessment | One task the student wants help with |
 | 10–25 | LLM basics and unsupported-detail activity | Students explain tokens and identify unsupported claims |
 | 25–40 | Demonstrate the learning loop | Class identifies a failure and a revision |
-| 40–60 | Pairs create and check a club announcement | Three checks with expected and actual results |
+| 40–60 | Students individually create and check a club announcement | Three checks with expected and actual results |
 | 60–70 | Break | |
-| 70–95 | Switch roles, revise, and recheck | Saved before and after results |
+| 70–95 | Revise and recheck the first lab | Saved before and after results |
 | 95–125 | Students complete an independent challenge | A useful artifact and documented evidence |
 | 125–135 | Break | |
-| 135–155 | Exchange results for peer checking and revise | A second person's finding and a response |
+| 135–155 | Review results, discuss findings, and revise | An evidence-based finding and a response |
 | 155–170 | Share evidence and complete the exit ticket | Evidence of a full loop |
 | 170–180 | Introduce the continued learning path and self-location | A selected follow-on lab |
 
-For three one-hour classes, use class one for the opening, demonstration, and initial paired response; class two for revision and the independent challenge; class three for peer review, sharing, reflection, and the next lab. Use the break time in this version for recaps and saving work between classes.
+For three one-hour classes, use class one for the opening, demonstration, and first individual response; class two for revision and the independent challenge; class three for individual review, room discussion, reflection, and the next lab. Use the break time in this version for recaps and saving work between classes.
 
 ## Opening script
 
@@ -50,7 +50,7 @@ Ask students to complete the starting self-assessment in their workbook. Explain
 
 ## Introduce LLM basics
 
-Use [LLM basics](llm-basics.md) for the 15-minute introduction. Spend about four minutes on LLMs and tokens, three on the sentence-completion analogy and context, five on hallucinations and the deliberately written practice response, and three on terminology and a partner explanation.
+Use [LLM basics](llm-basics.md) for the 15-minute introduction. Spend about four minutes on LLMs and tokens, three on the sentence-completion analogy and context, five on hallucinations and the deliberately written practice response, and three on terminology and an individual explanation.
 
 Emphasize “next token” rather than always “next word.” Describe prediction as the text-generation mechanism without treating it as a complete account of everything a modern AI system can do. Keep model architecture, training mathematics, and token accounting outside this introductory session.
 
@@ -84,13 +84,13 @@ Check the result directly against the scenario. Count the words using an editor 
 
 Explain that providing useful context is part of making a good request. Students do not need to learn AGENTS.md or tools to do this exercise.
 
-## Guide paired practice
+## Guide individual practice
 
-Students create their own request from the scenario, save the response, and record at least three checks. Everyone checks factual fidelity, completeness, and word count. A partner also checks whether the announcement makes the next action clear.
+Students create their own request from the scenario, save the response, and record at least three checks. Everyone checks factual fidelity, completeness, and word count. Students identify the signup method and deadline in their announcement. They may ask a classmate to read it for additional feedback.
 
 Ask: “Which sentence supports that finding?” “What did you compare it with?” “What would you change in your request?” When a result already meets the criteria, students can improve clarity or explore a different tone while keeping the facts intact. Recheck after every revision.
 
-Switch the directing and checking roles at minute 70, after the first break. Avoid treating longer prompts as automatically better; assess whether the direction and evidence are useful.
+At minute 70, students resume their own lab and revise from their findings. Avoid treating longer prompts as automatically better; assess whether the direction and evidence are useful.
 
 ## Independent challenge
 
@@ -98,13 +98,13 @@ Students choose one task using the same supplied facts:
 
 1. **Event FAQ:** Create five questions and answers covering audience, timing and location, materials, signup and capacity, and cost. Check every answer against the facts and verify that no unsupported details were added.
 2. **Preparation checklist:** Create a checklist for a student deciding whether and how to attend. Distinguish stated facts from suggested actions. Check that signup by Wednesday and the Thursday meeting appear, and that bringing a device is not described as required.
-3. **Announcement for a new reader:** Create an announcement for someone unfamiliar with the club, at most 80 words. Include the same required details. Check the facts, count words, and ask a peer to describe how they would sign up.
+3. **Announcement for a new reader:** Create an announcement for someone unfamiliar with the club, at most 80 words. Include the same required details. Check the facts, count words, and identify the signup instructions themselves, optionally asking a classmate for feedback.
 
 Each student defines three criteria before sending a request, saves a response, records checks, and makes at least one evidence-driven revision. They may revise the request or the artifact, but must explain which they changed and recheck the final result. If criteria were already met, the revision can improve clarity based on a reader's feedback.
 
-## Peer review and assessment
+## Review and assessment
 
-Partners exchange the goal, criteria, and final artifact. The reviewer records one finding with specific evidence. The author either makes a change or explains why the evidence supports keeping the result.
+Students review their own goal, criteria, and final artifact, recording one finding with specific evidence. Encourage open discussion and optional feedback from classmates or the instructor. Each student makes a change or explains why the evidence supports keeping the result, and records where the finding came from.
 
 Use this evidence checklist to identify support needs. It evaluates the task, not the student's place on the progression.
 
@@ -132,4 +132,4 @@ After the pilot, record where students got stuck, which checks they could perfor
 
 ## Learning framework
 
-Use the [human learning progression](agentic-ai-learning-progression-updated.md) to explore the inclusive ASK entry point, self-location approach, checking model, and iterative learning philosophy. The workshop applies these ideas through a fictional event, paired practice, and evidence-based reflection.
+Use the [human learning progression](agentic-ai-learning-progression-updated.md) to explore the inclusive ASK entry point, self-location approach, checking model, and iterative learning philosophy. The workshop applies these ideas through a fictional event, individual practice, and evidence-based reflection.

@@ -52,7 +52,7 @@ Here is a deliberately written practice response, not a captured AI answer:
 
 > Join us Friday in Room 204. Beginners are welcome. Register at club-example.school to meet our guest speaker.
 
-With a partner, identify what is supported, contradicted, or unsupported. Then write a request that would correct the answer without filling gaps by guessing.
+Individually identify what is supported, contradicted, or unsupported. Then write a request that would correct the answer without filling gaps by guessing.
 
 **Check your findings:** Room 204 and the beginner welcome match the facts. Friday contradicts Thursday. The signup website and guest speaker are unsupported. The response also omits the supplied signup method and deadline. A useful revision should use Thursday, retain the supported facts, include signup with the adviser by Wednesday, and remove unsupported additions.
 
@@ -78,4 +78,4 @@ With a partner, identify what is supported, contradicted, or unsupported. Then w
 
 Asking AI to avoid guessing is useful direction, but it is not a guarantee. Keep asking **“What would convince me this is right?”**
 
-Before moving on, explain to a partner why a token is not always a word and why a fluent answer still needs evidence.
+Before moving on, write a short explanation of why a token is not always a word and why a fluent answer still needs evidence.

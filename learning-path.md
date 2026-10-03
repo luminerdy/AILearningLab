@@ -10,7 +10,7 @@ Keep a small learning record containing your goal and audience, criteria, the in
 
 **Practice:** ASK and COLLABORATE. **Estimated time:** 30–45 minutes.
 
-Use the workshop's fictional event facts. Create one announcement for a new student and another for a club adviser. Before asking AI, define what each reader needs and set a length limit. Check both outputs for preserved facts and audience fit. Ask a peer to explain each message's next action. Revise one message based on that evidence.
+Use the workshop's fictional event facts. Create one announcement for a new student and another for a club adviser. Before asking AI, define what each reader needs and set a length limit. Check both outputs for preserved facts and audience fit. Identify each message's next action yourself. Optionally ask a classmate for feedback. Revise one message based on that evidence.
 
 **Deliver:** Two messages, checks, and a short explanation of how the audience changed your direction.
 
@@ -38,15 +38,15 @@ Choose a fictional school activity. Write a brief containing its purpose, audien
 
 **Practice:** TEACH through captured know-how. **Estimated time:** 45–60 minutes.
 
-Turn a successful earlier exercise into a procedure another student can follow. Include needed inputs, steps, output requirements, checks, and what to do if a check fails. Give the procedure to a partner with a different fictional event brief. Observe where they need clarification and improve the procedure.
+Turn a successful earlier exercise into a procedure another student can follow. Include needed inputs, steps, output requirements, checks, and what to do if a check fails. Try the procedure yourself with a different fictional event brief. Note unclear instructions and improve them. Optionally invite a classmate to try it too.
 
-**Deliver:** A reusable procedure, a partner's trial, and a revision. A procedure is the learning foundation for a skill; no installed skill or coding tool is required.
+**Deliver:** A reusable procedure, a trial with a new brief, and a revision. A procedure is the learning foundation for a skill; no installed skill or coding tool is required.
 
 ## Lab 5 Complete a small project
 
 **Practice:** Combine ASK, COLLABORATE, and ORIENT. **Estimated time:** 90–120 minutes.
 
-Create a small information kit for a fictional club event: a project brief, announcement, FAQ, and preparation checklist. Define how the artifacts must agree before creating them. Check cross-document consistency, unsupported details, completeness, and reader understanding. Invite another student to review the kit. Make an evidence-driven revision and describe remaining limitations.
+Create a small information kit for a fictional club event: a project brief, announcement, FAQ, and preparation checklist. Define how the artifacts must agree before creating them. Check cross-document consistency, unsupported details, completeness, and reader understanding. Review the kit yourself; optionally invite another student to give feedback. Make an evidence-driven revision and describe remaining limitations.
 
 **Deliver:** The kit and a learning record showing at least two full Define → Direct → Check → Adjust cycles. The goal is a coherent, checked project, rather than a large volume of output.
 
@@ -60,7 +60,7 @@ ENABLE, DELEGATE, and ORCHESTRATE can be added once useful tasks, access arrange
 |---|---|---|
 | 1 | Three-hour introductory workshop | Completed workbook and exit ticket |
 | 2 | Labs 1 and 2 with discussion and revision | Audience comparison and checked study helper |
-| 3 | Labs 3 and 4 with partner trials | Context brief and tested procedure |
+| 3 | Labs 3 and 4 with individual trials | Context brief and tested procedure |
 | 4 | Lab 5 with review and presentations | Checked project and learning record |
 
 Schedule breaks, recaps, and support around the lab estimates. Students may also complete these labs independently after the workshop. Reflect after each lab on what is comfortable and repeatable, what you have tried, and what would help next.

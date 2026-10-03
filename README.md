@@ -6,6 +6,8 @@ Visit the [AI Learning Lab website](https://luminerdy.github.io/AILearningLab/) 
 
 Use these materials for a three-hour introductory workshop, several class sessions, or independent practice afterward. No coding experience is required.
 
+Complete each lab individually. Talk with classmates, compare approaches, and ask for help as you work. Keep your own requests, results, checks, and revisions.
+
 ## Start the workshop
 
 - Start with [LLM basics](llm-basics.md) for tokens, prompts, context, and hallucinations.

@@ -18,7 +18,7 @@ These describe your experience today. They are not a ranking.
 
 ## LLM basics warmup
 
-Read [LLM basics](llm-basics.md) and complete the unsupported-detail activity with a partner.
+Read [LLM basics](llm-basics.md) and complete the unsupported-detail activity on your own.
 
 In my own words, a token is:
 
@@ -32,11 +32,11 @@ What I would ask AI to change:
 
 Code and Create Club is holding an introductory meeting Thursday, 3:30–4:15 p.m., in Room 204. It is for students curious about making things with technology. Beginners are welcome and no coding experience is needed. Materials are provided, so students do not need to bring a device. Capacity is 20 students. Sign up with the club adviser by Wednesday. There is no fee.
 
-## Practice with a partner
+## Your first lab
 
 Create a friendly announcement of at most 100 words. Include the event name, day, start and end times, location, beginner welcome, materials information, capacity, signup deadline and method, and no-fee information. Use only the supplied facts.
 
-Take turns directing AI and checking its response.
+Complete the full loop yourself. You can talk with classmates, compare approaches, and ask for help. Keep your own requests, results, and evidence.
 
 ### Define your goal
 
@@ -63,7 +63,7 @@ Compare it with the event facts. Count the words with an editor or manually. An 
 | Facts | No facts added or changed | | |
 | Completeness | Every required detail appears | | |
 | Length | At most 100 words | | |
-| Reader understanding | A partner can explain how to sign up | | |
+| Reader understanding | I can identify the signup method and deadline | | |
 
 ### Adjust and check again
 
@@ -83,7 +83,7 @@ Choose one task using the event facts:
 
 - **Event FAQ:** Five questions and answers covering audience, timing and location, materials, signup and capacity, and cost.
 - **Preparation checklist:** Help a student decide whether and how to attend. Separate stated facts from suggested actions. Include the Wednesday signup deadline and Thursday meeting; bringing a device is optional.
-- **Announcement for a new reader:** Explain the event in at most 80 words and include every required detail from the paired announcement.
+- **Announcement for a new reader:** Explain the event in at most 80 words and include every required detail from the first lab announcement.
 
 My chosen task and audience:
 
@@ -107,11 +107,11 @@ Save or paste the final result:
 
 My repeated checks and their results:
 
-## Exchange with a reviewer
+## Review your result
 
-Give your partner the goal, criteria, and final result.
+Review your goal, criteria, and final result yourself. Optionally ask a classmate or instructor for feedback.
 
-Reviewer's finding with evidence:
+My finding or optional feedback, with evidence:
 
 My response to the finding:
 
